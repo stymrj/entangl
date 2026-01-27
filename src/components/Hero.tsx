@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Check, Loader2, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Loader2, Sparkles, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -42,37 +42,47 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-32 sm:pt-36 pb-20 lg:pt-44 lg:pb-36 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-gradient-to-b from-coral/8 via-purple/5 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-32 left-10 w-32 h-32 bg-coral/10 rounded-full blur-2xl animate-pulse-soft" />
-        <div className="absolute bottom-32 right-10 w-40 h-40 bg-purple/10 rounded-full blur-2xl animate-pulse-soft" style={{ animationDelay: '1s' }} />
+    <section className="relative pt-32 sm:pt-40 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-pink/10 via-coral/5 to-transparent" />
+      
+      {/* Floating hearts decoration */}
+      <div className="absolute top-40 left-[10%] text-pink/30 animate-pulse-soft">
+        <Heart className="w-6 h-6 fill-current" />
+      </div>
+      <div className="absolute top-60 right-[8%] text-coral/40 animate-pulse-soft" style={{ animationDelay: '0.5s' }}>
+        <Heart className="w-8 h-8 fill-current" />
+      </div>
+      <div className="absolute bottom-40 left-[5%] text-pink/25 animate-pulse-soft" style={{ animationDelay: '1s' }}>
+        <Heart className="w-5 h-5 fill-current" />
+      </div>
+      <div className="absolute bottom-60 right-[12%] text-coral/30 animate-pulse-soft" style={{ animationDelay: '1.5s' }}>
+        <Heart className="w-4 h-4 fill-current" />
       </div>
 
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-slide-up">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border/50 shadow-sm mb-10 animate-slide-up">
             <Sparkles className="w-4 h-4 text-coral" />
-            <span className="text-sm font-medium text-foreground/80">Join 2,000+ professionals finding their match</span>
+            <span className="text-sm font-medium text-foreground">Join 2,000+ professionals finding their match</span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-slide-up text-balance leading-[1.08]">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display text-foreground mb-8 animate-slide-up leading-[1.05]">
             Where Professionals{" "}
-            <br className="hidden sm:block" />
-            <span className="font-display italic gradient-text">Find Their Match</span>
+            <br />
+            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">Find Their Match</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-10 sm:mb-12 max-w-2xl mx-auto animate-slide-up leading-relaxed px-4">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-slide-up leading-relaxed">
             We match verified professionals based on skills, interests, and chemistry. 
             Find your co-founder, mentor, or the connection that changes everything.
           </p>
 
           {/* Email Form */}
-          <div className="max-w-md mx-auto mb-14 animate-slide-up px-4">
+          <div className="max-w-lg mx-auto mb-4 animate-slide-up">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -80,11 +90,11 @@ const Hero = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-13 bg-card border-border focus:border-coral focus:ring-coral/20 text-base"
+                  className="h-14 bg-card border-border/60 focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
-                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-13" disabled={isLoading}>
+                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-14 rounded-xl text-base font-semibold px-8" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 w-4 h-4 animate-spin" />
@@ -108,32 +118,59 @@ const Hero = () => {
             )}
           </div>
 
+          {/* Fine print */}
+          <p className="text-sm text-muted-foreground mb-20 animate-slide-up">
+            Invite only · Corporate email required
+          </p>
+
           {/* Match Visual */}
-          <div className="relative flex items-center justify-center gap-4 sm:gap-6 md:gap-10 animate-slide-up">
+          <div className="relative flex items-center justify-center animate-slide-up">
+            {/* Connection line */}
+            <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-80 sm:w-96 h-20" viewBox="0 0 400 80">
+              <path 
+                d="M 50 50 Q 200 0 350 50" 
+                stroke="url(#lineGradient)" 
+                strokeWidth="2" 
+                fill="none"
+                strokeDasharray="5,5"
+                className="opacity-60"
+              />
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="hsl(var(--coral))" />
+                  <stop offset="100%" stopColor="hsl(var(--coral))" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
             {/* Left Person */}
-            <div className="relative group">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-coral-light to-coral flex items-center justify-center text-3xl sm:text-4xl md:text-6xl shadow-lg group-hover:shadow-xl transition-shadow duration-300 animate-float">
+            <div className="relative z-10">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-coral to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
                 👩‍💼
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-card rounded-full text-xs sm:text-sm font-semibold shadow-md border border-border whitespace-nowrap">
-                You
+              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-coral flex items-center justify-center">
+                <Heart className="w-3 h-3 text-primary-foreground fill-current" />
               </div>
+              <p className="text-sm text-muted-foreground mt-3 font-medium">You</p>
             </div>
 
-            {/* Heart */}
-            <div className="relative">
-              <div className="text-4xl sm:text-5xl md:text-6xl animate-pulse-soft">💕</div>
-              <div className="absolute inset-0 blur-xl bg-coral/20 rounded-full animate-pulse-soft" />
+            {/* Center Heart */}
+            <div className="relative z-10 mx-8 sm:mx-12">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-coral flex items-center justify-center shadow-lg">
+                <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground fill-current" />
+              </div>
+              <p className="text-sm text-coral mt-3 font-semibold">Match</p>
             </div>
 
             {/* Right Person */}
-            <div className="relative group">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-purple-light to-purple flex items-center justify-center text-3xl sm:text-4xl md:text-6xl shadow-lg group-hover:shadow-xl transition-shadow duration-300 animate-float" style={{ animationDelay: '1s' }}>
+            <div className="relative z-10">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-purple to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
                 👨‍💻
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-card rounded-full text-xs sm:text-sm font-semibold shadow-md border border-border whitespace-nowrap">
-                Match
+              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-coral flex items-center justify-center">
+                <Heart className="w-3 h-3 text-primary-foreground fill-current" />
               </div>
+              <p className="text-sm text-muted-foreground mt-3 font-medium">Them</p>
             </div>
           </div>
         </div>

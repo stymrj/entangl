@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Check, Sparkles, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -42,31 +42,37 @@ const CTA = () => {
   };
 
   return (
-    <section id="cta" className="py-20 lg:py-36 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] bg-coral/8 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-1/4 w-56 sm:w-80 h-56 sm:h-80 bg-purple/8 rounded-full blur-3xl" />
-      </div>
+    <section id="cta" className="py-24 lg:py-36 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/8 to-coral/5" />
+      
+      {/* Floating dots decoration */}
+      <div className="absolute top-1/4 left-[15%] w-2 h-2 rounded-full bg-coral/40" />
+      <div className="absolute top-1/3 right-[20%] w-3 h-3 rounded-full bg-pink/30" />
+      <div className="absolute bottom-1/3 left-[25%] w-2 h-2 rounded-full bg-purple/30" />
+      <div className="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 rounded-full bg-coral/35" />
+      <div className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-pink/40" />
+      <div className="absolute top-2/3 right-[10%] w-2 h-2 rounded-full bg-purple/25" />
 
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
-          {/* Icon */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl gradient-bg mx-auto mb-8 flex items-center justify-center shadow-lg">
-            <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" strokeWidth={1.5} />
+          {/* Heart Icon */}
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-coral mx-auto mb-10 flex items-center justify-center shadow-lg">
+            <Heart className="w-10 h-10 sm:w-12 sm:h-12 text-primary-foreground fill-current" />
           </div>
 
           {/* Content */}
-          <h2 className="section-title mb-5">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]">
             Ready to find{" "}
-            <span className="font-display italic gradient-text">your match?</span>
+            <br className="hidden sm:block" />
+            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">your match?</span>
           </h2>
-          <p className="section-subtitle mb-10 sm:mb-12">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
             Join the waitlist and be among the first to connect with professionals who complement your journey.
           </p>
 
           {/* Email Form */}
-          <div className="max-w-md mx-auto mb-6 px-4">
+          <div className="max-w-lg mx-auto mb-4">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -74,11 +80,11 @@ const CTA = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-13 bg-card border-border focus:border-coral focus:ring-coral/20 text-base"
+                  className="h-14 bg-card border-border/60 focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
-                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-13" disabled={isLoading}>
+                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-14 rounded-xl text-base font-semibold px-8" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 w-4 h-4 animate-spin" />
