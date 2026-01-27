@@ -1,16 +1,43 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("waitlist-signup", {
+        body: { email, source: "hero" },
+      });
+
+      if (error) throw error;
+
       setIsSubmitted(true);
+      toast({
+        title: "Welcome aboard! 💕",
+        description: data.message || "You're on the waitlist!",
+      });
+    } catch (error: any) {
+      console.error("Waitlist signup error:", error);
+      toast({
+        title: "Oops!",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -53,10 +80,20 @@ const Hero = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="h-12 bg-card border-border/50 focus:border-coral"
                   required
+                  disabled={isLoading}
                 />
-                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto">
-                  Join Waitlist
-                  <ArrowRight className="ml-1 w-4 h-4" />
+                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                      Joining...
+                    </>
+                  ) : (
+                    <>
+                      Join Waitlist
+                      <ArrowRight className="ml-1 w-4 h-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             ) : (
