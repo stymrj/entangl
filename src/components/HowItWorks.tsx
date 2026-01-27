@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Mail, ShieldCheck, Link2, MessageCircle, Heart } from "lucide-react";
 
 const steps = [
@@ -48,27 +48,52 @@ const staggerContainer = {
 const HowItWorks = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms
+  const y1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <section id="how-it-works" className="py-24 lg:py-36 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/5 to-transparent" />
+      {/* Background with parallax */}
+      <motion.div 
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/5 to-transparent"
+        style={{ y: bgY }}
+      />
       
-      {/* Floating hearts */}
+      {/* Floating hearts with parallax */}
       <motion.div 
         className="absolute top-20 left-[5%] text-pink/20"
-        animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+        style={{ y: y1 }}
+        animate={{ rotate: [0, 5, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
         <Heart className="w-5 h-5 fill-current" />
       </motion.div>
       <motion.div 
         className="absolute bottom-20 right-[8%] text-coral/25"
-        animate={{ y: [0, -12, 0], rotate: [0, -5, 0] }}
+        style={{ y: y2 }}
+        animate={{ rotate: [0, -5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
         <Heart className="w-6 h-6 fill-current" />
       </motion.div>
+
+      {/* Additional parallax decorations */}
+      <motion.div 
+        className="absolute top-1/4 right-[5%] w-24 h-24 rounded-full bg-coral/5 blur-2xl"
+        style={{ y: y1 }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-[10%] w-32 h-32 rounded-full bg-purple/5 blur-2xl"
+        style={{ y: y2 }}
+      />
       
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}

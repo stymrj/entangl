@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
@@ -39,6 +39,20 @@ const CTA = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms for floating dots
+  const dot1Y = useTransform(scrollYProgress, [0, 1], [30, -60]);
+  const dot2Y = useTransform(scrollYProgress, [0, 1], [50, -40]);
+  const dot3Y = useTransform(scrollYProgress, [0, 1], [20, -80]);
+  const dot4Y = useTransform(scrollYProgress, [0, 1], [60, -30]);
+  const dot5Y = useTransform(scrollYProgress, [0, 1], [40, -50]);
+  const dot6Y = useTransform(scrollYProgress, [0, 1], [25, -70]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -71,39 +85,46 @@ const CTA = () => {
 
   return (
     <section id="cta" className="py-24 lg:py-36 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/8 to-coral/5" />
+      {/* Background gradient with parallax */}
+      <motion.div 
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/8 to-coral/5"
+        style={{ y: bgY }}
+      />
       
-      {/* Floating dots decoration */}
+      {/* Floating dots decoration with parallax */}
       <motion.div 
         className="absolute top-1/4 left-[15%] w-2 h-2 rounded-full bg-coral/40"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{ y: dot1Y }}
       />
       <motion.div 
         className="absolute top-1/3 right-[20%] w-3 h-3 rounded-full bg-pink/30"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        style={{ y: dot2Y }}
       />
       <motion.div 
         className="absolute bottom-1/3 left-[25%] w-2 h-2 rounded-full bg-purple/30"
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        style={{ y: dot3Y }}
       />
       <motion.div 
         className="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 rounded-full bg-coral/35"
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        style={{ y: dot4Y }}
       />
       <motion.div 
         className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-pink/40"
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        style={{ y: dot5Y }}
       />
       <motion.div 
         className="absolute top-2/3 right-[10%] w-2 h-2 rounded-full bg-purple/25"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+        style={{ y: dot6Y }}
+      />
+
+      {/* Additional parallax blobs */}
+      <motion.div 
+        className="absolute top-1/4 right-[30%] w-24 h-24 rounded-full bg-coral/5 blur-2xl"
+        style={{ y: dot2Y }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-[20%] w-32 h-32 rounded-full bg-purple/5 blur-3xl"
+        style={{ y: dot4Y }}
       />
 
       <div className="container mx-auto px-4" ref={ref}>
