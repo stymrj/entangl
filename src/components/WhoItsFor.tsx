@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Code, Layers, Briefcase, Building2, Rocket, Users, Heart } from "lucide-react";
 
 const personas = [
@@ -33,48 +35,103 @@ const personas = [
   },
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.2
+    }
+  }
+};
+
 const WhoItsFor = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section id="who-its-for" className="py-24 lg:py-36 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/5 to-transparent" />
       
       {/* Floating hearts */}
-      <div className="absolute top-32 right-[10%] text-coral/25 animate-pulse-soft">
+      <motion.div 
+        className="absolute top-32 right-[10%] text-coral/25"
+        animate={{ y: [0, -10, 0], rotate: [0, 8, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+      >
         <Heart className="w-6 h-6 fill-current" />
-      </div>
-      <div className="absolute bottom-32 left-[8%] text-pink/20 animate-pulse-soft" style={{ animationDelay: '0.8s' }}>
+      </motion.div>
+      <motion.div 
+        className="absolute bottom-32 left-[8%] text-pink/20"
+        animate={{ y: [0, -8, 0], rotate: [0, -6, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+      >
         <Heart className="w-5 h-5 fill-current" />
-      </div>
+      </motion.div>
       
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block text-coral font-semibold text-sm tracking-widest uppercase mb-6">
+        <motion.div 
+          className="text-center mb-16 lg:mb-20"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+        >
+          <motion.span 
+            className="inline-block text-coral font-semibold text-sm tracking-widest uppercase mb-6"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Who It's For
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]">
+          </motion.span>
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Find your professional{" "}
             <br className="hidden sm:block" />
             <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">soulmate</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Whether you're seeking a co-founder, mentor, or collaborator—your perfect match is waiting.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Personas Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-5 max-w-4xl mx-auto">
+        <motion.div 
+          className="grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-5 max-w-4xl mx-auto"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+        >
           {personas.map((persona, index) => (
-            <div
+            <motion.div
               key={persona.title}
-              className="group relative bg-card rounded-2xl p-6 lg:p-7 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-border/30 hover:-translate-y-1"
-              style={{ animationDelay: `${index * 80}ms` }}
+              className="group relative bg-card rounded-2xl p-6 lg:p-7 text-center shadow-sm hover:shadow-lg transition-all duration-300 border border-border/30"
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-coral/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral/15 transition-colors">
+              <motion.div 
+                className="w-14 h-14 rounded-2xl bg-coral/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral/15 transition-colors"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
                 <persona.icon className="w-7 h-7 text-coral" strokeWidth={1.5} />
-              </div>
+              </motion.div>
 
               {/* Content */}
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">
@@ -83,9 +140,9 @@ const WhoItsFor = () => {
               <p className="text-sm text-muted-foreground">
                 {persona.subtitle}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
