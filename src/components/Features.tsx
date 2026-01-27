@@ -25,23 +25,22 @@ const features = [
 
 const Features = () => {
   return (
-    <section id="features" className="py-20 lg:py-36 bg-secondary/40 relative overflow-hidden">
+    <section id="features" className="py-24 lg:py-36 bg-secondary/30 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-coral/5 rounded-full blur-3xl -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-72 h-72 bg-purple/5 rounded-full blur-3xl -translate-y-1/2" />
       
       <div className="container mx-auto px-4 relative">
         {/* Header */}
-        <div className="section-header">
-          <span className="section-label">
-            <span className="w-1.5 h-1.5 rounded-full bg-coral" />
+        <div className="text-center mb-16 lg:mb-20">
+          <span className="inline-block text-coral font-semibold text-sm tracking-widest uppercase mb-6">
             Why Entangl
           </span>
-          <h2 className="section-title">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]">
             Built for{" "}
-            <span className="font-display italic gradient-text">real connections</span>
+            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">real connections</span>
           </h2>
-          <p className="section-subtitle">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Not another networking app. A curated space where ambitious professionals find their perfect match.
           </p>
         </div>
@@ -51,19 +50,19 @@ const Features = () => {
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="group bg-card rounded-2xl p-6 lg:p-8 card-shadow card-hover border border-border/40"
+              className="group bg-card rounded-2xl p-7 lg:p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-border/30"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-5 shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
-                <feature.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
+              <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-5 group-hover:bg-coral/15 transition-colors">
+                <feature.icon className="w-6 h-6 text-coral" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
               <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
                 {feature.title}
               </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>

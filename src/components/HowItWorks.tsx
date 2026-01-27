@@ -1,4 +1,4 @@
-import { Mail, Shield, Users, MessageCircle } from "lucide-react";
+import { Mail, ShieldCheck, Link2, MessageCircle, Heart } from "lucide-react";
 
 const steps = [
   {
@@ -9,13 +9,13 @@ const steps = [
   },
   {
     number: "02",
-    icon: Shield,
+    icon: ShieldCheck,
     title: "Get verified",
     description: "We confirm your professional identity to ensure everyone you meet is genuine and trustworthy.",
   },
   {
     number: "03",
-    icon: Users,
+    icon: Link2,
     title: "Discover your matches",
     description: "Our algorithm finds professionals nearby who complement your skills and share your ambitions.",
   },
@@ -29,49 +29,57 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-20 lg:py-36 relative">
-      {/* Subtle background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-secondary/30 to-transparent" />
+    <section id="how-it-works" className="py-24 lg:py-36 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/5 to-transparent" />
+      
+      {/* Floating hearts */}
+      <div className="absolute top-20 left-[5%] text-pink/20 animate-pulse-soft">
+        <Heart className="w-5 h-5 fill-current" />
+      </div>
+      <div className="absolute bottom-20 right-[8%] text-coral/25 animate-pulse-soft" style={{ animationDelay: '1s' }}>
+        <Heart className="w-6 h-6 fill-current" />
+      </div>
       
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="section-header">
-          <span className="section-label">
-            <span className="w-1.5 h-1.5 rounded-full bg-coral" />
+        <div className="text-center mb-16 lg:mb-20">
+          <span className="inline-block text-coral font-semibold text-sm tracking-widest uppercase mb-6">
             How It Works
           </span>
-          <h2 className="section-title">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]">
             Finding your match{" "}
-            <span className="font-display italic gradient-text">made simple</span>
+            <br className="hidden sm:block" />
+            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">made simple</span>
           </h2>
-          <p className="section-subtitle">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Four steps to meet the professionals who'll change your career
           </p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <div
               key={step.number}
-              className="group relative bg-card rounded-2xl p-6 lg:p-8 card-shadow card-hover border border-border/40"
+              className="group relative bg-card rounded-2xl p-7 lg:p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-border/30"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Step Number */}
-              <div className="absolute -top-3 -left-3 w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg">
-                {step.number}
-              </div>
-
-              {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-secondary/80 flex items-center justify-center mb-5 group-hover:bg-coral/10 transition-all duration-300 group-hover:scale-105">
-                <step.icon className="w-7 h-7 text-coral" strokeWidth={1.5} />
+              {/* Number and Icon row */}
+              <div className="flex items-start justify-between mb-6">
+                <span className="font-display text-4xl sm:text-5xl italic text-coral/80">
+                  {step.number}
+                </span>
+                <div className="w-11 h-11 rounded-xl bg-coral/10 flex items-center justify-center group-hover:bg-coral/15 transition-colors">
+                  <step.icon className="w-5 h-5 text-coral" strokeWidth={1.5} />
+                </div>
               </div>
 
               {/* Content */}
               <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
                 {step.title}
               </h3>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </div>

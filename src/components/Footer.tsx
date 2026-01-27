@@ -1,5 +1,6 @@
 import { Heart, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import logoFull from "@/assets/logo-full.png";
 
 const Footer = () => {
   const footerLinks = {
@@ -30,17 +31,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-secondary/50 border-t border-border/40">
-      <div className="container mx-auto px-4 py-14 lg:py-20">
+    <footer className="bg-secondary/30 border-t border-border/30">
+      <div className="container mx-auto px-4 py-16 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center shadow-sm">
-                <span className="text-primary-foreground font-bold text-lg">E</span>
-              </div>
-              <span className="font-bold text-xl text-foreground">Entangl</span>
+            <Link to="/" className="inline-block mb-5">
+              <img src={logoFull} alt="Entangl" className="h-12 w-auto" />
             </Link>
             
             <p className="text-muted-foreground mb-7 max-w-xs text-sm leading-relaxed">
@@ -119,7 +117,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-14 pt-8 border-t border-border/40">
+        <div className="mt-16 pt-8 border-t border-border/30">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
               © 2026 Entangl. All rights reserved.

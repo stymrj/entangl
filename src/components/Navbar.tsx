@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import logoFull from "@/assets/logo-full.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,33 +17,40 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/30">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-18">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center shadow-sm">
-              <span className="text-primary-foreground font-bold text-lg">E</span>
-            </div>
-            <span className="font-bold text-xl text-foreground">Entangl</span>
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoFull} alt="Entangl" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Button key={link.label} variant="nav" size="sm" asChild>
-                {isHomePage ? (
-                  <a href={link.href} className="font-medium">{link.label}</a>
-                ) : (
-                  <Link to={link.href} className="font-medium">{link.label}</Link>
-                )}
-              </Button>
+              isHomePage ? (
+                <a 
+                  key={link.label} 
+                  href={link.href} 
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link 
+                  key={link.label} 
+                  to={link.href} 
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="gradient" size="sm" className="font-semibold shadow-sm" asChild>
+            <Button variant="gradient" size="default" className="font-semibold rounded-full px-6" asChild>
               {isHomePage ? (
                 <a href="#cta">Find Your Match</a>
               ) : (
@@ -69,7 +77,7 @@ const Navbar = () => {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors font-medium"
+                    className="px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors font-medium"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -78,7 +86,7 @@ const Navbar = () => {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className="px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors font-medium"
+                    className="px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors font-medium"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -86,7 +94,7 @@ const Navbar = () => {
                 )
               ))}
               <div className="mt-3 px-4">
-                <Button variant="gradient" className="w-full font-semibold" asChild>
+                <Button variant="gradient" className="w-full font-semibold rounded-full" asChild>
                   {isHomePage ? (
                     <a href="#cta">Find Your Match</a>
                   ) : (
