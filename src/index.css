@@ -104,8 +104,9 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: transparent;
   }
 }
 
