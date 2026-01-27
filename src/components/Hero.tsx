@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Sparkles, Heart } from "lucide-react";
@@ -36,6 +36,20 @@ const Hero = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax transforms for different layers
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,39 +82,56 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-32 sm:pt-40 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-pink/10 via-coral/5 to-transparent" />
+    <section ref={ref} className="relative pt-32 sm:pt-40 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+      {/* Background gradient with parallax */}
+      <motion.div 
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-pink/10 via-coral/5 to-transparent"
+        style={{ scale }}
+      />
       
-      {/* Floating hearts decoration */}
+      {/* Floating hearts decoration with parallax */}
       <motion.div 
         className="absolute top-40 left-[10%] text-pink/30"
-        animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+        style={{ y: y1 }}
+        animate={{ rotate: [0, 5, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
         <Heart className="w-6 h-6 fill-current" />
       </motion.div>
       <motion.div 
         className="absolute top-60 right-[8%] text-coral/40"
-        animate={{ y: [0, -15, 0], rotate: [0, -5, 0] }}
+        style={{ y: y2 }}
+        animate={{ rotate: [0, -5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >
         <Heart className="w-8 h-8 fill-current" />
       </motion.div>
       <motion.div 
         className="absolute bottom-40 left-[5%] text-pink/25"
-        animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+        style={{ y: y3 }}
+        animate={{ rotate: [0, 10, 0] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
         <Heart className="w-5 h-5 fill-current" />
       </motion.div>
       <motion.div 
         className="absolute bottom-60 right-[12%] text-coral/30"
-        animate={{ y: [0, -12, 0], rotate: [0, -8, 0] }}
+        style={{ y: y4 }}
+        animate={{ rotate: [0, -8, 0] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
       >
         <Heart className="w-4 h-4 fill-current" />
       </motion.div>
+
+      {/* Extra parallax decorative elements */}
+      <motion.div 
+        className="absolute top-1/3 left-[20%] w-32 h-32 rounded-full bg-coral/5 blur-2xl"
+        style={{ y: y2 }}
+      />
+      <motion.div 
+        className="absolute top-1/2 right-[15%] w-40 h-40 rounded-full bg-purple/5 blur-3xl"
+        style={{ y: y3 }}
+      />
 
       <div className="container mx-auto px-4">
         <motion.div 
@@ -108,6 +139,7 @@ const Hero = () => {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
+          style={{ opacity }}
         >
           {/* Badge */}
           <motion.div 

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { BadgeCheck, MapPin, Heart, Lock } from "lucide-react";
 
 const features = [
@@ -44,19 +44,38 @@ const staggerContainer = {
 const Features = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms for background elements
+  const leftBlobY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const rightBlobY = useTransform(scrollYProgress, [0, 1], [-50, 150]);
+  const leftBlobScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.9]);
+  const rightBlobScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 0.85]);
 
   return (
     <section id="features" className="py-24 lg:py-36 bg-secondary/30 relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Background decoration with parallax */}
       <motion.div 
         className="absolute top-1/2 left-0 w-72 h-72 bg-coral/5 rounded-full blur-3xl -translate-y-1/2"
-        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ y: leftBlobY, scale: leftBlobScale }}
       />
       <motion.div 
         className="absolute top-1/2 right-0 w-72 h-72 bg-purple/5 rounded-full blur-3xl -translate-y-1/2"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        style={{ y: rightBlobY, scale: rightBlobScale }}
+      />
+
+      {/* Additional parallax elements */}
+      <motion.div 
+        className="absolute top-1/4 left-[20%] w-16 h-16 rounded-full bg-pink/5 blur-xl"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [30, -60]) }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-[25%] w-20 h-20 rounded-full bg-coral/5 blur-xl"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-40, 80]) }}
       />
       
       <div className="container mx-auto px-4 relative" ref={ref}>
