@@ -100,6 +100,30 @@ export default {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "float-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.8" },
+          "25%": { transform: "translate(40px, -30px) scale(1.1)", opacity: "1" },
+          "50%": { transform: "translate(-20px, 20px) scale(1.2)", opacity: "0.9" },
+          "75%": { transform: "translate(30px, 10px) scale(1.05)", opacity: "1" },
+        },
+        "float-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.7" },
+          "25%": { transform: "translate(-30px, 25px) scale(1.15)", opacity: "0.9" },
+          "50%": { transform: "translate(25px, -35px) scale(1.1)", opacity: "1" },
+          "75%": { transform: "translate(-15px, -20px) scale(1.05)", opacity: "0.8" },
+        },
+        "float-3": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.75" },
+          "25%": { transform: "translate(-25px, -20px) scale(1.2)", opacity: "0.85" },
+          "50%": { transform: "translate(35px, 15px) scale(1.15)", opacity: "1" },
+          "75%": { transform: "translate(10px, -30px) scale(1.08)", opacity: "0.9" },
+        },
+        "float-4": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.8" },
+          "25%": { transform: "translate(20px, 35px) scale(1.12)", opacity: "0.95" },
+          "50%": { transform: "translate(-30px, -25px) scale(1.18)", opacity: "0.85" },
+          "75%": { transform: "translate(-10px, 20px) scale(1.1)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,6 +132,10 @@ export default {
         "pulse-soft": "pulse-soft 2s ease-in-out infinite",
         "slide-up": "slide-up 0.6s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
+        "float-1": "float-1 15s ease-in-out infinite",
+        "float-2": "float-2 18s ease-in-out infinite",
+        "float-3": "float-3 20s ease-in-out infinite",
+        "float-4": "float-4 16s ease-in-out infinite",
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
