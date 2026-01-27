@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, ShieldCheck, Link2, MessageCircle } from "lucide-react";
+import AnimatedBackground from "./AnimatedBackground";
 
 const steps = [
   {
@@ -35,12 +36,7 @@ const HowItWorks = () => {
 
   return (
     <section id="how-it-works" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Enhanced background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/60 via-secondary/40 to-secondary/60" />
-        <div className="absolute top-1/2 left-0 w-72 h-72 bg-coral/5 rounded-full blur-3xl -translate-y-1/2" />
-        <div className="absolute top-1/3 right-0 w-80 h-80 bg-purple/5 rounded-full blur-3xl" />
-      </div>
+      <AnimatedBackground variant="section" />
 
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
@@ -76,7 +72,7 @@ const HowItWorks = () => {
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
-              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-7 border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              className="group bg-card/60 backdrop-blur-md rounded-2xl p-7 border border-border/40 shadow-sm hover:shadow-lg hover:border-coral/30 transition-all duration-300"
               initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
