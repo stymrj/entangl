@@ -12,7 +12,7 @@ const CTA = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,29 +45,56 @@ const CTA = () => {
   };
 
   return (
-    <section id="cta" className="py-20 lg:py-28">
+    <section id="cta" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Enhanced background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-coral/[0.04] to-pink/[0.03]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-coral/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="container mx-auto px-4" ref={ref}>
         <motion.div 
           className="max-w-xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
           {/* Heart Icon */}
-          <div className="w-16 h-16 rounded-2xl bg-coral mx-auto mb-8 flex items-center justify-center">
-            <Heart className="w-8 h-8 text-primary-foreground fill-current" />
-          </div>
+          <motion.div 
+            className="w-20 h-20 rounded-3xl bg-gradient-to-br from-coral to-pink mx-auto mb-10 flex items-center justify-center shadow-lg"
+            whileHover={{ scale: 1.05, rotate: 3 }}
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Heart className="w-10 h-10 text-primary-foreground fill-current" />
+          </motion.div>
 
           {/* Content */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight">
+          <motion.h2 
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-5 leading-tight"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             Ready to find <span className="italic text-coral">your match?</span>
-          </h2>
-          <p className="text-muted-foreground mb-10 max-w-md mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground mb-10 max-w-md mx-auto text-lg"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
             Join the waitlist and be among the first to connect with professionals who complement your journey.
-          </p>
+          </motion.p>
 
           {/* Email Form */}
-          <div className="max-w-md mx-auto">
+          <motion.div 
+            className="max-w-md mx-auto"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -75,14 +102,14 @@ const CTA = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 bg-card border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl"
+                  className="h-12 bg-card/80 backdrop-blur-sm border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
                   variant="gradient" 
-                  className="shrink-0 h-12 rounded-xl text-base font-semibold px-6" 
+                  className="shrink-0 h-12 rounded-xl text-base font-semibold px-6 shadow-md hover:shadow-lg transition-shadow" 
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -110,12 +137,17 @@ const CTA = () => {
                 Welcome to the waitlist! We'll be in touch soon. 💕
               </motion.div>
             )}
-          </div>
+          </motion.div>
 
           {/* Fine print */}
-          <p className="text-sm text-muted-foreground mt-4">
+          <motion.p 
+            className="text-sm text-muted-foreground mt-4"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.25 }}
+          >
             Invite only · Corporate email required
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>
