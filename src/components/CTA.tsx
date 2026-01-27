@@ -42,31 +42,31 @@ const CTA = () => {
   };
 
   return (
-    <section id="cta" className="py-16 lg:py-32 relative overflow-hidden">
+    <section id="cta" className="py-20 lg:py-36 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-coral/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-1/4 w-48 sm:w-72 h-48 sm:h-72 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] bg-coral/8 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-56 sm:w-80 h-56 sm:h-80 bg-purple/8 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
           {/* Icon */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl gradient-bg mx-auto mb-6 sm:mb-8 flex items-center justify-center shadow-lg">
-            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-primary-foreground" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl gradient-bg mx-auto mb-8 flex items-center justify-center shadow-lg">
+            <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" strokeWidth={1.5} />
           </div>
 
           {/* Content */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
+          <h2 className="section-title mb-5">
             Ready to find{" "}
-            <span className="gradient-text">your match?</span>
+            <span className="font-display italic gradient-text">your match?</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-lg mx-auto px-4">
+          <p className="section-subtitle mb-10 sm:mb-12">
             Join the waitlist and be among the first to connect with professionals who complement your journey.
           </p>
 
           {/* Email Form */}
-          <div className="max-w-md mx-auto mb-5 sm:mb-6 px-4">
+          <div className="max-w-md mx-auto mb-6 px-4">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -74,11 +74,11 @@ const CTA = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 bg-card border-border/50 focus:border-coral"
+                  className="h-13 bg-card border-border focus:border-coral focus:ring-coral/20 text-base"
                   required
                   disabled={isLoading}
                 />
-                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto" disabled={isLoading}>
+                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-13" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 w-4 h-4 animate-spin" />
@@ -87,15 +87,15 @@ const CTA = () => {
                   ) : (
                     <>
                       Join Waitlist
-                      <ArrowRight className="ml-1 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </>
                   )}
                 </Button>
               </form>
             ) : (
-              <div className="flex items-center justify-center gap-2 text-coral font-medium animate-fade-in py-3">
-                <div className="w-6 h-6 rounded-full bg-coral/10 flex items-center justify-center">
-                  <Check className="w-4 h-4" />
+              <div className="flex items-center justify-center gap-3 text-coral font-semibold animate-fade-in py-4">
+                <div className="w-8 h-8 rounded-full bg-coral/10 flex items-center justify-center">
+                  <Check className="w-5 h-5" />
                 </div>
                 Welcome to the waitlist! We'll be in touch soon. 💕
               </div>
@@ -103,7 +103,7 @@ const CTA = () => {
           </div>
 
           {/* Fine print */}
-          <p className="text-xs sm:text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Invite only · Corporate email required
           </p>
         </div>
