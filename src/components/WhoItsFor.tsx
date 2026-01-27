@@ -37,56 +37,67 @@ const personas = [
 
 const WhoItsFor = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="who-its-for" className="py-20 lg:py-28 bg-secondary/30">
+    <section id="who-its-for" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Enhanced background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/60 via-secondary/40 to-secondary/60" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-coral/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-14 lg:mb-16">
+        <div className="text-center mb-16">
           <motion.p 
             className="text-coral font-semibold text-sm tracking-wide uppercase mb-4"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
           >
             Who It's For
           </motion.p>
           <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-5 leading-tight"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             Find your professional <span className="italic text-coral">soulmate</span>
           </motion.h2>
           <motion.p 
-            className="text-muted-foreground max-w-lg mx-auto"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-muted-foreground max-w-lg mx-auto text-lg"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             Whether you're seeking a co-founder, mentor, or collaborator—your perfect match is waiting.
           </motion.p>
         </div>
 
         {/* Personas Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-5 max-w-4xl mx-auto">
           {personas.map((persona, index) => (
             <motion.div
               key={persona.title}
-              className="bg-card rounded-2xl p-5 text-center border border-border/40 hover:border-coral/20 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
+              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.05 * index }}
+              transition={{ duration: 0.5, delay: 0.05 + index * 0.06 }}
+              whileHover={{ y: -4 }}
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mx-auto mb-3">
-                <persona.icon className="w-6 h-6 text-coral" strokeWidth={1.5} />
-              </div>
+              <motion.div 
+                className="w-16 h-16 rounded-2xl bg-coral/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral/15 transition-colors"
+                whileHover={{ scale: 1.08, rotate: 3 }}
+              >
+                <persona.icon className="w-8 h-8 text-coral" strokeWidth={1.5} />
+              </motion.div>
 
               {/* Content */}
-              <h3 className="font-semibold text-foreground mb-1">
+              <h3 className="font-semibold text-foreground mb-1 text-lg">
                 {persona.title}
               </h3>
               <p className="text-sm text-muted-foreground">

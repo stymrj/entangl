@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -44,17 +44,22 @@ const Hero = () => {
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
-      {/* Subtle background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-coral/[0.03] via-transparent to-transparent" />
+      {/* Enhanced background with multiple gradient layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-coral/[0.06] via-pink/[0.03] to-transparent" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-1/4 w-80 h-80 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-secondary/50 to-transparent" />
+      </div>
       
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           {/* Badge */}
           <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border/50 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border/50 mb-8 shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
             <span className="text-sm font-medium text-muted-foreground">Join 2,000+ professionals on the waitlist</span>
@@ -65,7 +70,7 @@ const Hero = () => {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1] tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
             Where Professionals
             <br />
@@ -77,7 +82,7 @@ const Hero = () => {
             className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
             We match verified professionals based on skills, interests, and chemistry. 
             Find your co-founder, mentor, or the connection that changes everything.
@@ -88,7 +93,7 @@ const Hero = () => {
             className="max-w-md mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           >
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -97,14 +102,14 @@ const Hero = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 bg-card border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl"
+                  className="h-12 bg-card/80 backdrop-blur-sm border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
                   variant="gradient" 
-                  className="shrink-0 h-12 rounded-xl text-base font-semibold px-6" 
+                  className="shrink-0 h-12 rounded-xl text-base font-semibold px-6 shadow-md hover:shadow-lg transition-shadow" 
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -139,41 +144,55 @@ const Hero = () => {
             className="text-sm text-muted-foreground mt-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             Invite only · Corporate email required
           </motion.p>
         </div>
 
-        {/* Simple visual */}
+        {/* Visual matching illustration */}
         <motion.div 
-          className="mt-20 flex items-center justify-center gap-6"
+          className="mt-20 flex items-center justify-center gap-8 sm:gap-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
         >
           {/* Left Person */}
-          <div className="text-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-coral to-pink flex items-center justify-center text-2xl sm:text-3xl shadow-md border-4 border-card">
+          <motion.div 
+            className="text-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-coral to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
               👩‍💼
             </div>
-            <p className="text-sm text-muted-foreground mt-2 font-medium">You</p>
-          </div>
+            <p className="text-sm text-muted-foreground mt-3 font-medium">You</p>
+          </motion.div>
 
-          {/* Connection indicator */}
-          <div className="flex items-center gap-2">
-            <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-coral/60 to-coral/20" />
-            <div className="w-3 h-3 rounded-full bg-coral" />
-            <div className="w-12 sm:w-16 h-px bg-gradient-to-l from-purple/60 to-purple/20" />
+          {/* Connection indicator with heart */}
+          <div className="flex items-center gap-3">
+            <div className="w-16 sm:w-20 h-px bg-gradient-to-r from-coral to-coral/30" />
+            <motion.div 
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-coral/10 border border-coral/20 flex items-center justify-center"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-coral fill-coral/30" />
+            </motion.div>
+            <div className="w-16 sm:w-20 h-px bg-gradient-to-l from-purple to-purple/30" />
           </div>
 
           {/* Right Person */}
-          <div className="text-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-purple to-pink flex items-center justify-center text-2xl sm:text-3xl shadow-md border-4 border-card">
+          <motion.div 
+            className="text-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-purple to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
               👨‍💻
             </div>
-            <p className="text-sm text-muted-foreground mt-2 font-medium">Them</p>
-          </div>
+            <p className="text-sm text-muted-foreground mt-3 font-medium">Them</p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -31,64 +31,75 @@ const steps = [
 
 const HowItWorks = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-28 bg-secondary/30">
+    <section id="how-it-works" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Enhanced background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/60 via-secondary/40 to-secondary/60" />
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-coral/5 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-purple/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-14 lg:mb-16">
+        <div className="text-center mb-16">
           <motion.p 
             className="text-coral font-semibold text-sm tracking-wide uppercase mb-4"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
           >
             How It Works
           </motion.p>
           <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-5 leading-tight"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             Finding your match, <span className="italic text-coral">simplified</span>
           </motion.h2>
           <motion.p 
-            className="text-muted-foreground max-w-lg mx-auto"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-muted-foreground max-w-lg mx-auto text-lg"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             Four simple steps to meet the professionals who'll change your career
           </motion.p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
-              className="bg-card rounded-2xl p-6 border border-border/40 hover:border-coral/20 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
+              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-7 border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 * index }}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+              whileHover={{ y: -4 }}
             >
               {/* Number and Icon */}
-              <div className="flex items-start justify-between mb-5">
-                <span className="font-display text-3xl italic text-coral/70">
+              <div className="flex items-start justify-between mb-6">
+                <span className="font-display text-4xl italic text-coral/60">
                   {step.number}
                 </span>
-                <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
-                  <step.icon className="w-5 h-5 text-coral" strokeWidth={1.5} />
-                </div>
+                <motion.div 
+                  className="w-14 h-14 rounded-2xl bg-coral/10 flex items-center justify-center group-hover:bg-coral/15 transition-colors"
+                  whileHover={{ scale: 1.05, rotate: 3 }}
+                >
+                  <step.icon className="w-7 h-7 text-coral" strokeWidth={1.5} />
+                </motion.div>
               </div>
 
               {/* Content */}
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {step.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

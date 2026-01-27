@@ -27,59 +27,70 @@ const features = [
 
 const Features = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="features" className="py-20 lg:py-28">
+    <section id="features" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Enhanced background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-coral/[0.02] to-background" />
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-pink/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-purple/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-14 lg:mb-16">
+        <div className="text-center mb-16">
           <motion.p 
             className="text-coral font-semibold text-sm tracking-wide uppercase mb-4"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
           >
             Why Entangl
           </motion.p>
           <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-5 leading-tight"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             Built for <span className="italic text-coral">real connections</span>
           </motion.h2>
           <motion.p 
-            className="text-muted-foreground max-w-lg mx-auto"
-            initial={{ opacity: 0, y: 10 }}
+            className="text-muted-foreground max-w-lg mx-auto text-lg"
+            initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             Not another networking app. A curated space for ambitious professionals.
           </motion.p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid sm:grid-cols-2 gap-4 lg:gap-6 max-w-3xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-5 lg:gap-6 max-w-4xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              className="bg-card rounded-2xl p-6 border border-border/40 hover:border-coral/20 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
+              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-7 border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 * index }}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+              whileHover={{ y: -4 }}
             >
               {/* Icon */}
-              <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center mb-4">
-                <feature.icon className="w-5 h-5 text-coral" strokeWidth={1.5} />
-              </div>
+              <motion.div 
+                className="w-14 h-14 rounded-2xl bg-coral/10 flex items-center justify-center mb-5 group-hover:bg-coral/15 transition-colors"
+                whileHover={{ scale: 1.05, rotate: 3 }}
+              >
+                <feature.icon className="w-7 h-7 text-coral" strokeWidth={1.5} />
+              </motion.div>
 
               {/* Content */}
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {feature.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
