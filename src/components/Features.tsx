@@ -25,37 +25,42 @@ const features = [
 
 const Features = () => {
   return (
-    <section id="features" className="py-16 lg:py-32 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="features" className="py-20 lg:py-36 bg-secondary/40 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-coral/5 rounded-full blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 right-0 w-72 h-72 bg-purple/5 rounded-full blur-3xl -translate-y-1/2" />
+      
+      <div className="container mx-auto px-4 relative">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="text-coral font-semibold text-sm uppercase tracking-wider mb-3 sm:mb-4 block">
+        <div className="section-header">
+          <span className="section-label">
+            <span className="w-1.5 h-1.5 rounded-full bg-coral" />
             Why Entangl
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
+          <h2 className="section-title">
             Built for{" "}
-            <span className="gradient-text">real connections</span>
+            <span className="font-display italic gradient-text">real connections</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto px-4">
+          <p className="section-subtitle">
             Not another networking app. A curated space where ambitious professionals find their perfect match.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-5 lg:gap-6 max-w-4xl mx-auto">
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="group bg-card rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 card-shadow card-hover border border-border/50"
+              className="group bg-card rounded-2xl p-6 lg:p-8 card-shadow card-hover border border-border/40"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl gradient-bg flex items-center justify-center mb-4 sm:mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">
-                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
+              <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-5 shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
+                <feature.icon className="w-6 h-6 text-primary-foreground" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
                 {feature.title}
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">

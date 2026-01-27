@@ -29,42 +29,46 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-16 lg:py-32">
+    <section id="how-it-works" className="py-20 lg:py-36 relative">
+      {/* Subtle background */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-secondary/30 to-transparent" />
+      
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="text-coral font-semibold text-sm uppercase tracking-wider mb-3 sm:mb-4 block">
+        <div className="section-header">
+          <span className="section-label">
+            <span className="w-1.5 h-1.5 rounded-full bg-coral" />
             How It Works
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
+          <h2 className="section-title">
             Finding your match{" "}
-            <span className="gradient-text">made simple</span>
+            <span className="font-display italic gradient-text">made simple</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto px-4">
+          <p className="section-subtitle">
             Four steps to meet the professionals who'll change your career
           </p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {steps.map((step, index) => (
             <div
               key={step.number}
-              className="group relative bg-card rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 card-shadow card-hover border border-border/50"
+              className="group relative bg-card rounded-2xl p-6 lg:p-8 card-shadow card-hover border border-border/40"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Step Number */}
-              <div className="absolute -top-2.5 -left-2.5 sm:-top-3 sm:-left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl gradient-bg flex items-center justify-center text-primary-foreground font-bold text-xs sm:text-sm shadow-md">
+              <div className="absolute -top-3 -left-3 w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg">
                 {step.number}
               </div>
 
               {/* Icon */}
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-secondary flex items-center justify-center mb-4 sm:mb-5 group-hover:bg-coral/10 transition-colors duration-300">
-                <step.icon className="w-6 h-6 sm:w-7 sm:h-7 text-coral" />
+              <div className="w-14 h-14 rounded-2xl bg-secondary/80 flex items-center justify-center mb-5 group-hover:bg-coral/10 transition-all duration-300 group-hover:scale-105">
+                <step.icon className="w-7 h-7 text-coral" strokeWidth={1.5} />
               </div>
 
               {/* Content */}
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
                 {step.title}
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
