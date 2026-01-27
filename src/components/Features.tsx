@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BadgeCheck, MapPin, Heart, Lock } from "lucide-react";
+import AnimatedBackground from "./AnimatedBackground";
 
 const features = [
   {
@@ -31,12 +32,7 @@ const Features = () => {
 
   return (
     <section id="features" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Enhanced background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-coral/[0.02] to-background" />
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-pink/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-purple/5 rounded-full blur-3xl" />
-      </div>
+      <AnimatedBackground variant="section" />
 
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
@@ -72,7 +68,7 @@ const Features = () => {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-7 border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              className="group bg-card/60 backdrop-blur-md rounded-2xl p-7 border border-border/40 shadow-sm hover:shadow-lg hover:border-coral/30 transition-all duration-300"
               initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}

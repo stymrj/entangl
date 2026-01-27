@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Code, Layers, Briefcase, Building2, Rocket, Users } from "lucide-react";
+import AnimatedBackground from "./AnimatedBackground";
 
 const personas = [
   {
@@ -41,12 +42,7 @@ const WhoItsFor = () => {
 
   return (
     <section id="who-its-for" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Enhanced background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/60 via-secondary/40 to-secondary/60" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-coral/5 rounded-full blur-3xl" />
-      </div>
+      <AnimatedBackground variant="section" />
 
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
@@ -82,7 +78,7 @@ const WhoItsFor = () => {
           {personas.map((persona, index) => (
             <motion.div
               key={persona.title}
-              className="group bg-card/80 backdrop-blur-sm rounded-2xl p-6 text-center border border-border/50 shadow-sm hover:shadow-md hover:border-coral/30 transition-all duration-300"
+              className="group bg-card/60 backdrop-blur-md rounded-2xl p-6 text-center border border-border/40 shadow-sm hover:shadow-lg hover:border-coral/30 transition-all duration-300"
               initial={{ opacity: 0, y: 25 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.05 + index * 0.06 }}

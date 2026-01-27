@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import AnimatedBackground from "./AnimatedBackground";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
@@ -43,20 +44,14 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
-      {/* Enhanced background with multiple gradient layers */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-coral/[0.06] via-pink/[0.03] to-transparent" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-coral/10 rounded-full blur-3xl" />
-        <div className="absolute top-20 right-1/4 w-80 h-80 bg-purple/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-secondary/50 to-transparent" />
-      </div>
+    <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
+      <AnimatedBackground variant="hero" />
       
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
           {/* Badge */}
           <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-sm border border-border/50 mb-8 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/60 backdrop-blur-md border border-border/40 mb-8 shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -102,7 +97,7 @@ const Hero = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 bg-card/80 backdrop-blur-sm border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
+                  className="h-12 bg-card/60 backdrop-blur-md border-border/60 focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
@@ -163,7 +158,7 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-coral to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-coral to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card/80 backdrop-blur-sm">
               👩‍💼
             </div>
             <p className="text-sm text-muted-foreground mt-3 font-medium">You</p>
@@ -173,7 +168,7 @@ const Hero = () => {
           <div className="flex items-center gap-3">
             <div className="w-16 sm:w-20 h-px bg-gradient-to-r from-coral to-coral/30" />
             <motion.div 
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-coral/10 border border-coral/20 flex items-center justify-center"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-coral/10 backdrop-blur-sm border border-coral/20 flex items-center justify-center"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -188,7 +183,7 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-purple to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-purple to-pink flex items-center justify-center text-3xl sm:text-4xl shadow-lg border-4 border-card/80 backdrop-blur-sm">
               👨‍💻
             </div>
             <p className="text-sm text-muted-foreground mt-3 font-medium">Them</p>

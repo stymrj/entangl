@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import AnimatedBackground from "./AnimatedBackground";
 
 const CTA = () => {
   const [email, setEmail] = useState("");
@@ -46,12 +47,7 @@ const CTA = () => {
 
   return (
     <section id="cta" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Enhanced background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-coral/[0.04] to-pink/[0.03]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-coral/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple/5 rounded-full blur-3xl" />
-      </div>
+      <AnimatedBackground variant="cta" />
 
       <div className="container mx-auto px-4" ref={ref}>
         <motion.div 
@@ -102,7 +98,7 @@ const CTA = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 bg-card/80 backdrop-blur-sm border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
+                  className="h-12 bg-card/60 backdrop-blur-md border-border/60 focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
                   required
                   disabled={isLoading}
                 />
