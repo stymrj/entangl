@@ -1,15 +1,43 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 100, damping: 15 }
+  }
+};
+
 const CTA = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,32 +75,83 @@ const CTA = () => {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/8 to-coral/5" />
       
       {/* Floating dots decoration */}
-      <div className="absolute top-1/4 left-[15%] w-2 h-2 rounded-full bg-coral/40" />
-      <div className="absolute top-1/3 right-[20%] w-3 h-3 rounded-full bg-pink/30" />
-      <div className="absolute bottom-1/3 left-[25%] w-2 h-2 rounded-full bg-purple/30" />
-      <div className="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 rounded-full bg-coral/35" />
-      <div className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-pink/40" />
-      <div className="absolute top-2/3 right-[10%] w-2 h-2 rounded-full bg-purple/25" />
+      <motion.div 
+        className="absolute top-1/4 left-[15%] w-2 h-2 rounded-full bg-coral/40"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute top-1/3 right-[20%] w-3 h-3 rounded-full bg-pink/30"
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
+      <motion.div 
+        className="absolute bottom-1/3 left-[25%] w-2 h-2 rounded-full bg-purple/30"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 rounded-full bg-coral/35"
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+      />
+      <motion.div 
+        className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-pink/40"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+      />
+      <motion.div 
+        className="absolute top-2/3 right-[10%] w-2 h-2 rounded-full bg-purple/25"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+      />
 
-      <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center">
+      <div className="container mx-auto px-4" ref={ref}>
+        <motion.div 
+          className="max-w-2xl mx-auto text-center"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+        >
           {/* Heart Icon */}
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-coral mx-auto mb-10 flex items-center justify-center shadow-lg">
-            <Heart className="w-10 h-10 sm:w-12 sm:h-12 text-primary-foreground fill-current" />
-          </div>
+          <motion.div 
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-coral mx-auto mb-10 flex items-center justify-center shadow-lg"
+            variants={scaleIn}
+            whileHover={{ scale: 1.05, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <motion.div
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Heart className="w-10 h-10 sm:w-12 sm:h-12 text-primary-foreground fill-current" />
+            </motion.div>
+          </motion.div>
 
           {/* Content */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]">
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Ready to find{" "}
             <br className="hidden sm:block" />
             <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">your match?</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p 
+            className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Join the waitlist and be among the first to connect with professionals who complement your journey.
-          </p>
+          </motion.p>
 
           {/* Email Form */}
-          <div className="max-w-lg mx-auto mb-4">
+          <motion.div 
+            className="max-w-lg mx-auto mb-4"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -99,20 +178,29 @@ const CTA = () => {
                 </Button>
               </form>
             ) : (
-              <div className="flex items-center justify-center gap-3 text-coral font-semibold animate-fade-in py-4">
+              <motion.div 
+                className="flex items-center justify-center gap-3 text-coral font-semibold py-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              >
                 <div className="w-8 h-8 rounded-full bg-coral/10 flex items-center justify-center">
                   <Check className="w-5 h-5" />
                 </div>
                 Welcome to the waitlist! We'll be in touch soon. 💕
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
 
           {/* Fine print */}
-          <p className="text-sm text-muted-foreground">
+          <motion.p 
+            className="text-sm text-muted-foreground"
+            variants={fadeInUp}
+            transition={{ duration: 0.5 }}
+          >
             Invite only · Corporate email required
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
     </section>
   );
