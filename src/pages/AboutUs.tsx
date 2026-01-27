@@ -27,12 +27,9 @@ const values = [
 ];
 
 const team = [
-  { name: "Sarah Chen", role: "CEO & Co-Founder", emoji: "👩‍💼" },
-  { name: "Marcus Johnson", role: "CTO & Co-Founder", emoji: "👨‍💻" },
-  { name: "Elena Rodriguez", role: "Head of Product", emoji: "👩‍🎨" },
-  { name: "David Kim", role: "Head of Engineering", emoji: "👨‍🔬" },
-  { name: "Priya Patel", role: "Head of Community", emoji: "👩‍🏫" },
-  { name: "James Wright", role: "Head of Growth", emoji: "👨‍💼" },
+  { name: "Bharti Nandan", role: "CEO & Co-Founder", emoji: "👩‍💼" },
+  { name: "Anand Kumar", role: "CTO & Co-Founder", emoji: "👨‍💻" },
+  { name: "Satyam Raj", role: "Full Stack Developer", emoji: "👩‍🎨" },
 ];
 
 const AboutUs = () => {
@@ -46,18 +43,17 @@ const AboutUs = () => {
             <div className="absolute top-20 left-1/4 w-72 h-72 bg-coral/10 rounded-full blur-3xl animate-pulse-soft" />
             <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple/10 rounded-full blur-3xl" />
           </div>
-          
+
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <span className="text-coral font-semibold text-sm uppercase tracking-wider mb-4 block animate-fade-in">
                 About Us
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up text-balance">
-                Redefining how{" "}
-                <span className="gradient-text">professionals connect</span>
+                Redefining how <span className="gradient-text">professionals connect</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground animate-slide-up text-balance">
-                We started Entangl because we believe the best professional relationships aren't found—they're matched. 
+                We started Entangl because we believe the best professional relationships aren't found—they're matched.
                 Our mission is to help ambitious professionals find their perfect career match.
               </p>
             </div>
@@ -74,27 +70,30 @@ const AboutUs = () => {
                 </h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    In 2024, our founders Sarah and Marcus met at a tech conference. Despite being in the same industry, 
+                    In 2024, our founders Sarah and Marcus met at a tech conference. Despite being in the same industry,
                     they had never crossed paths—until a mutual friend made the introduction that changed everything.
                   </p>
                   <p>
-                    That serendipitous meeting sparked an idea: what if technology could create more of these 
-                    meaningful professional connections? Not through endless scrolling or superficial networking, 
-                    but through intelligent matching based on skills, goals, and chemistry.
+                    That serendipitous meeting sparked an idea: what if technology could create more of these meaningful
+                    professional connections? Not through endless scrolling or superficial networking, but through
+                    intelligent matching based on skills, goals, and chemistry.
                   </p>
                   <p>
-                    Today, Entangl has helped over 2,000 professionals find their co-founders, mentors, and career-changing 
-                    connections. We're just getting started.
+                    Today, Entangl has helped over 2,000 professionals find their co-founders, mentors, and
+                    career-changing connections. We're just getting started.
                   </p>
                 </div>
               </div>
-              
+
               <div className="order-1 lg:order-2 flex justify-center">
                 <div className="relative">
                   <div className="w-64 h-64 md:w-80 md:h-80 rounded-3xl gradient-bg flex items-center justify-center text-8xl md:text-9xl shadow-2xl animate-float">
                     🤝
                   </div>
-                  <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-2xl bg-card shadow-lg flex items-center justify-center text-4xl border border-border animate-float" style={{ animationDelay: '1s' }}>
+                  <div
+                    className="absolute -bottom-4 -right-4 w-24 h-24 rounded-2xl bg-card shadow-lg flex items-center justify-center text-4xl border border-border animate-float"
+                    style={{ animationDelay: "1s" }}
+                  >
                     💡
                   </div>
                 </div>
