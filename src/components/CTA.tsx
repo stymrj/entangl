@@ -1,35 +1,10 @@
 import { useState, useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2, Heart } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { type: "spring" as const, stiffness: 100, damping: 15 }
-  }
-};
 
 const CTA = () => {
   const [email, setEmail] = useState("");
@@ -37,21 +12,7 @@ const CTA = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  // Parallax transforms for floating dots
-  const dot1Y = useTransform(scrollYProgress, [0, 1], [30, -60]);
-  const dot2Y = useTransform(scrollYProgress, [0, 1], [50, -40]);
-  const dot3Y = useTransform(scrollYProgress, [0, 1], [20, -80]);
-  const dot4Y = useTransform(scrollYProgress, [0, 1], [60, -30]);
-  const dot5Y = useTransform(scrollYProgress, [0, 1], [40, -50]);
-  const dot6Y = useTransform(scrollYProgress, [0, 1], [25, -70]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,95 +45,29 @@ const CTA = () => {
   };
 
   return (
-    <section id="cta" className="py-24 lg:py-36 relative overflow-hidden">
-      {/* Background gradient with parallax */}
-      <motion.div 
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/8 to-coral/5"
-        style={{ y: bgY }}
-      />
-      
-      {/* Floating dots decoration with parallax */}
-      <motion.div 
-        className="absolute top-1/4 left-[15%] w-2 h-2 rounded-full bg-coral/40"
-        style={{ y: dot1Y }}
-      />
-      <motion.div 
-        className="absolute top-1/3 right-[20%] w-3 h-3 rounded-full bg-pink/30"
-        style={{ y: dot2Y }}
-      />
-      <motion.div 
-        className="absolute bottom-1/3 left-[25%] w-2 h-2 rounded-full bg-purple/30"
-        style={{ y: dot3Y }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 right-[15%] w-2.5 h-2.5 rounded-full bg-coral/35"
-        style={{ y: dot4Y }}
-      />
-      <motion.div 
-        className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-pink/40"
-        style={{ y: dot5Y }}
-      />
-      <motion.div 
-        className="absolute top-2/3 right-[10%] w-2 h-2 rounded-full bg-purple/25"
-        style={{ y: dot6Y }}
-      />
-
-      {/* Additional parallax blobs */}
-      <motion.div 
-        className="absolute top-1/4 right-[30%] w-24 h-24 rounded-full bg-coral/5 blur-2xl"
-        style={{ y: dot2Y }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 left-[20%] w-32 h-32 rounded-full bg-purple/5 blur-3xl"
-        style={{ y: dot4Y }}
-      />
-
+    <section id="cta" className="py-20 lg:py-28">
       <div className="container mx-auto px-4" ref={ref}>
         <motion.div 
-          className="max-w-2xl mx-auto text-center"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={staggerContainer}
+          className="max-w-xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
         >
           {/* Heart Icon */}
-          <motion.div 
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-coral mx-auto mb-10 flex items-center justify-center shadow-lg"
-            variants={scaleIn}
-            whileHover={{ scale: 1.05, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          >
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Heart className="w-10 h-10 sm:w-12 sm:h-12 text-primary-foreground fill-current" />
-            </motion.div>
-          </motion.div>
+          <div className="w-16 h-16 rounded-2xl bg-coral mx-auto mb-8 flex items-center justify-center">
+            <Heart className="w-8 h-8 text-primary-foreground fill-current" />
+          </div>
 
           {/* Content */}
-          <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-          >
-            Ready to find{" "}
-            <br className="hidden sm:block" />
-            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">your match?</span>
-          </motion.h2>
-          <motion.p 
-            className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-          >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight">
+            Ready to find <span className="italic text-coral">your match?</span>
+          </h2>
+          <p className="text-muted-foreground mb-10 max-w-md mx-auto">
             Join the waitlist and be among the first to connect with professionals who complement your journey.
-          </motion.p>
+          </p>
 
           {/* Email Form */}
-          <motion.div 
-            className="max-w-lg mx-auto mb-4"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="max-w-md mx-auto">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
@@ -180,11 +75,16 @@ const CTA = () => {
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 bg-card border-border/60 focus:border-coral focus:ring-coral/20 text-base rounded-xl shadow-sm"
+                  className="h-12 bg-card border-border focus:border-coral focus:ring-coral/20 text-base rounded-xl"
                   required
                   disabled={isLoading}
                 />
-                <Button type="submit" variant="gradient" size="lg" className="shrink-0 w-full sm:w-auto h-14 rounded-xl text-base font-semibold px-8" disabled={isLoading}>
+                <Button 
+                  type="submit" 
+                  variant="gradient" 
+                  className="shrink-0 h-12 rounded-xl text-base font-semibold px-6" 
+                  disabled={isLoading}
+                >
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 w-4 h-4 animate-spin" />
@@ -200,27 +100,22 @@ const CTA = () => {
               </form>
             ) : (
               <motion.div 
-                className="flex items-center justify-center gap-3 text-coral font-semibold py-4"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="flex items-center justify-center gap-3 text-coral font-medium py-3"
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
               >
                 <div className="w-8 h-8 rounded-full bg-coral/10 flex items-center justify-center">
-                  <Check className="w-5 h-5" />
+                  <Check className="w-4 h-4" />
                 </div>
                 Welcome to the waitlist! We'll be in touch soon. 💕
               </motion.div>
             )}
-          </motion.div>
+          </div>
 
           {/* Fine print */}
-          <motion.p 
-            className="text-sm text-muted-foreground"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
-          >
+          <p className="text-sm text-muted-foreground mt-4">
             Invite only · Corporate email required
-          </motion.p>
+          </p>
         </motion.div>
       </div>
     </section>

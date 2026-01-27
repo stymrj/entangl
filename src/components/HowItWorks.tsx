@@ -1,168 +1,99 @@
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Mail, ShieldCheck, Link2, MessageCircle, Heart } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Mail, ShieldCheck, Link2, MessageCircle } from "lucide-react";
 
 const steps = [
   {
     number: "01",
     icon: Mail,
     title: "Sign up with work email",
-    description: "Create your profile using your corporate email. This keeps our community exclusive and verified.",
+    description: "Create your profile using your corporate email to join our verified community.",
   },
   {
     number: "02",
     icon: ShieldCheck,
     title: "Get verified",
-    description: "We confirm your professional identity to ensure everyone you meet is genuine and trustworthy.",
+    description: "We confirm your professional identity to ensure trust and authenticity.",
   },
   {
     number: "03",
     icon: Link2,
-    title: "Discover your matches",
-    description: "Our algorithm finds professionals nearby who complement your skills and share your ambitions.",
+    title: "Discover matches",
+    description: "Our algorithm finds professionals who complement your skills and goals.",
   },
   {
     number: "04",
     icon: MessageCircle,
-    title: "Start the conversation",
+    title: "Start connecting",
     description: "Break the ice, grab coffee, or collaborate remotely. Real connections start here.",
   },
 ];
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const HowItWorks = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  // Parallax transforms
-  const y1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="how-it-works" className="py-24 lg:py-36 relative overflow-hidden">
-      {/* Background with parallax */}
-      <motion.div 
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-pink/5 to-transparent"
-        style={{ y: bgY }}
-      />
-      
-      {/* Floating hearts with parallax */}
-      <motion.div 
-        className="absolute top-20 left-[5%] text-pink/20"
-        style={{ y: y1 }}
-        animate={{ rotate: [0, 5, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <Heart className="w-5 h-5 fill-current" />
-      </motion.div>
-      <motion.div 
-        className="absolute bottom-20 right-[8%] text-coral/25"
-        style={{ y: y2 }}
-        animate={{ rotate: [0, -5, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      >
-        <Heart className="w-6 h-6 fill-current" />
-      </motion.div>
-
-      {/* Additional parallax decorations */}
-      <motion.div 
-        className="absolute top-1/4 right-[5%] w-24 h-24 rounded-full bg-coral/5 blur-2xl"
-        style={{ y: y1 }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 left-[10%] w-32 h-32 rounded-full bg-purple/5 blur-2xl"
-        style={{ y: y2 }}
-      />
-      
+    <section id="how-it-works" className="py-20 lg:py-28 bg-secondary/30">
       <div className="container mx-auto px-4" ref={ref}>
         {/* Header */}
-        <motion.div 
-          className="text-center mb-16 lg:mb-20"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={staggerContainer}
-        >
-          <motion.span 
-            className="inline-block text-coral font-semibold text-sm tracking-widest uppercase mb-6"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
+        <div className="text-center mb-14 lg:mb-16">
+          <motion.p 
+            className="text-coral font-semibold text-sm tracking-wide uppercase mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4 }}
           >
             How It Works
-          </motion.span>
+          </motion.p>
           <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground mb-6 leading-[1.1]"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display text-foreground mb-4 leading-tight"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
-            Finding your match{" "}
-            <br className="hidden sm:block" />
-            <span className="italic bg-gradient-to-r from-coral via-pink to-purple bg-clip-text text-transparent">made simple</span>
+            Finding your match, <span className="italic text-coral">simplified</span>
           </motion.h2>
           <motion.p 
-            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto"
-            variants={fadeInUp}
-            transition={{ duration: 0.5 }}
+            className="text-muted-foreground max-w-lg mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
-            Four steps to meet the professionals who'll change your career
+            Four simple steps to meet the professionals who'll change your career
           </motion.p>
-        </motion.div>
+        </div>
 
         {/* Steps Grid */}
-        <motion.div 
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 max-w-6xl mx-auto"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={staggerContainer}
-        >
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
-              className="group relative bg-card rounded-2xl p-7 lg:p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-border/30"
-              variants={fadeInUp}
-              transition={{ duration: 0.5 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="bg-card rounded-2xl p-6 border border-border/40 hover:border-coral/20 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.1 * index }}
             >
-              {/* Number and Icon row */}
-              <div className="flex items-start justify-between mb-6">
-                <span className="font-display text-4xl sm:text-5xl italic text-coral/80">
+              {/* Number and Icon */}
+              <div className="flex items-start justify-between mb-5">
+                <span className="font-display text-3xl italic text-coral/70">
                   {step.number}
                 </span>
-                <div className="w-11 h-11 rounded-xl bg-coral/10 flex items-center justify-center group-hover:bg-coral/15 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
                   <step.icon className="w-5 h-5 text-coral" strokeWidth={1.5} />
                 </div>
               </div>
 
               {/* Content */}
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3">
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 {step.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
