@@ -29,3 +29,4 @@ ehthumbs.db
 
 # Supabase
 .supabase/
+.env
