@@ -10,27 +10,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2️⃣ Install dependencies
       - name: Install dependencies
-        run: npm instal
+        run: npm install
 
+      # 3️⃣ Build the project
       - name: Build project
         run: npm run build
 
+      # 4️⃣ Debug dist folder (optional)
       - name: Debug dist folder
         run: |
+          echo "Current directory:"
           pwd
+          echo "Root files:"
           ls -la
+          echo "Dist contents:"
           ls -la dist
 
+      # 5️⃣ Clean target folder on EC2 (but keep the folder itself)
+      - name: Clear target folder
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Removing old files inside /var/www/html/entangl.in"
+            rm -rf /var/www/html/entangl.in/*
+
+      # 6️⃣ Upload only the contents of dist
       - name: Upload dist contents to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "dist/*"
-          target: "/var/www/html/entangl.in"
-          rm: false
+          source: "dist/."      # ✅ copy only contents, not the folder
+          target: "/var/www/html/entangl.in/"
+          rm: false             # we already cleared the folder manually
