@@ -75,9 +75,13 @@ serve(async (req) => {
     if (resendApiKey) {
       try {
         const resend = new Resend(resendApiKey);
-        await resend.emails.send({
-          from: "Entangl Contact <contact@entangl.in>",
+        
+        // Send notification to admin
+        console.log("Sending admin notification email...");
+        const adminEmail = await resend.emails.send({
+          from: "Entangl Support <support@entangl.in>", // Using verified domain
           to: ["support@entangl.in"],
+          reply_to: email, // Allow admin to reply directly to the user
           subject: `New Contact Form: ${subject}`,
           html: `
             <h2>New Contact Form Submission</h2>
@@ -90,10 +94,12 @@ serve(async (req) => {
             <p><small>Submitted at: ${new Date().toISOString()}</small></p>
           `,
         });
+        console.log("Admin email sent:", adminEmail);
 
         // Send auto-reply to user
-        await resend.emails.send({
-          from: "Entangl Support <support@entangl.in>",
+        console.log("Sending user confirmation email...");
+        const userEmail = await resend.emails.send({
+          from: "Entangl Support <support@entangl.in>", // Using verified domain
           to: [email],
           subject: "We've received your message",
           html: `
@@ -106,10 +112,14 @@ serve(async (req) => {
             <p>Best regards,<br>The Entangl Team</p>
           `,
         });
+        console.log("User confirmation email sent:", userEmail);
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
+        console.error("Email error details:", JSON.stringify(emailError, null, 2));
         // Don't fail the request if email fails
       }
+    } else {
+      console.log("RESEND_API_KEY not configured, skipping email notifications");
     }
 
     return new Response(JSON.stringify({ success: true, data }), {

@@ -136,9 +136,10 @@ const handler = async (req: Request): Promise<Response> => {
     // Send confirmation email via Resend (optional)
     if (resendApiKey) {
       try {
+        console.log("Attempting to send confirmation email to:", sanitizedEmail);
         const resend = new Resend(resendApiKey);
-        await resend.emails.send({
-          from: "Entangl <hello@entangl.com>", // TODO: Replace with your verified domain
+        const emailResult = await resend.emails.send({
+          from: "Entangl <support@entangl.in>", // Using verified domain
           to: [sanitizedEmail],
           subject: "Welcome to the Entangl Waitlist! 💕",
           html: `
@@ -153,11 +154,14 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
           `,
         });
-        console.log("Confirmation email sent");
-      } catch (emailError) {
+        console.log("Confirmation email sent successfully:", emailResult);
+      } catch (emailError: any) {
         console.error("Error sending email (non-fatal):", emailError);
+        console.error("Email error details:", emailError.message || JSON.stringify(emailError, null, 2));
         // Don't fail the request if email fails
       }
+    } else {
+      console.log("RESEND_API_KEY not configured, skipping email sending");
     }
 
     return new Response(

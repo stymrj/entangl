@@ -214,7 +214,7 @@ const PressKit = () => {
                 For press inquiries, interviews, or additional materials, please contact our communications team.
               </p>
               <Button variant="gradient" size="lg" asChild>
-                <a href="mailto:supprt@entangl.in">
+                <a href="mailto:support@entangl.in">
                   Contact Press Team
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </a>

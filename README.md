@@ -203,7 +203,7 @@ This project is private. All rights reserved.
 
 ## 📞 Contact
 
-For inquiries, visit [entangl.com/contact](https://entangl.com/contact) or email support@entangl.in
+For inquiries, visit [entangl.in/contact](https://entangl.in/contact) or email support@entangl.in
 
 ## 🙏 Acknowledgments
 
