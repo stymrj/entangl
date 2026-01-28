@@ -1,6 +1,5 @@
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoFull from "@/assets/logo-full.png";
 
 const Footer = () => {
   const footerLinks = {
@@ -30,7 +29,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="md:col-span-1">
             <Link to="/" className="inline-block mb-6">
-              <img src={logoFull} alt="Entangl" className="h-10 w-auto" />
+              <img src="/new_logo.png" alt="Entangl" className="h-20 w-auto" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Where professionals find their perfect match.

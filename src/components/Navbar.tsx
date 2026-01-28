@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import logoFull from "@/assets/logo-full.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +23,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src={logoFull} 
+              src="/new_logo.png" 
               alt="Entangl" 
-              className="h-8 w-auto"
+              className="h-12 w-auto md:h-16"
             />
           </Link>
 
