@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 import { Resend } from "npm:resend@2.0.0";
+import { MongoClient } from "npm:mongodb@6.3.0";
 
 // CORS headers
 const corsHeaders = {
@@ -24,6 +25,7 @@ const handler = async (req: Request): Promise<Response> => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   const resendApiKey = Deno.env.get("RESEND_API_KEY");
+  const mongodbUri = Deno.env.get("MONGODB_URI");
 
   if (!supabaseUrl || !supabaseServiceKey) {
     console.error("Supabase credentials are not configured");
@@ -99,6 +101,37 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log(`Waitlist entry created with id: ${insertedData.id}`);
+
+    // Also save to MongoDB
+    if (mongodbUri) {
+      try {
+        console.log("Attempting to connect to MongoDB...");
+        const mongoClient = new MongoClient(mongodbUri);
+        await mongoClient.connect();
+        console.log("MongoDB connected successfully");
+        
+        const db = mongoClient.db("Entangl");
+        const collection = db.collection("waitlist");
+        
+        const mongoResult = await collection.insertOne({
+          email: sanitizedEmail,
+          source,
+          status: "pending",
+          createdAt: new Date(),
+          supabaseId: insertedData.id,
+        });
+        
+        console.log("Data saved to MongoDB with ID:", mongoResult.insertedId);
+        await mongoClient.close();
+        console.log("MongoDB connection closed");
+      } catch (mongoError: any) {
+        console.error("MongoDB save error (non-fatal):", mongoError);
+        console.error("MongoDB error details:", mongoError.message);
+        // Don't fail the request if MongoDB fails
+      }
+    } else {
+      console.log("MongoDB URI not configured, skipping MongoDB save");
+    }
 
     // Send confirmation email via Resend (optional)
     if (resendApiKey) {
