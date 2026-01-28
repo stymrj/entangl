@@ -9,6 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+      SSH_USER: ${{ secrets.EC2_USER }}
+      SERVER_IP: ${{ secrets.EC2_HOST }}
+      TARGET_PATH: "/var/www/html/entangl.in"
+
     steps:
       # 1️⃣ Checkout repo
       - name: Checkout repository
@@ -28,32 +34,19 @@ jobs:
           echo "Dist contents:"
           ls -la dist
 
-      # 5️⃣ Create a tar of dist contents
-      - name: Tar dist contents
+      # 5️⃣ Prepare SSH key
+      - name: Prepare SSH key
         run: |
-          tar -czf dist.tar.gz -C dist .
+          echo "$SSH_PRIVATE_KEY" > key.pem
+          chmod 600 key.pem
+          ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
-      # 6️⃣ Upload tar to EC2
-      - name: Upload tar to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "dist.tar.gz"
-          target: "/var/www/html/entangl.in/"
-          rm: false
+      # 6️⃣ Clear old files on EC2
+      - name: Clear old files on EC2
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP "rm -rf $TARGET_PATH/*"
 
-      # 7️⃣ Extract tar on EC2 and remove it
-      - name: Extract dist on EC2
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            echo "Clearing old files..."
-            rm -rf /var/www/html/entangl.in/*
-            echo "Extracting new files..."
-            tar -xzf /var/www/html/entangl.in/dist.tar.gz -C /var/www/html/entangl.in
-            rm /var/www/html/entangl.in/dist.tar.gz
+      # 7️⃣ Copy dist contents to EC2
+      - name: Copy dist contents to EC2
+        run: |
+          scp -i key.pem -o StrictHostKeyChecking=no -r dist/* $SSH_USER@$SERVER_IP:$TARGET_PATH/
