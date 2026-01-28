@@ -2,7 +2,7 @@
 
 A modern platform connecting professionals through genuine chemistry and meaningful relationships. Find your perfect match based on skills, goals, and compatibility.
 
-**Live Site**: Coming soon  
+**Live Site**: https://www.entangl.in  
 **GitHub**: https://github.com/stymrj/entangl
 
 ## 🎯 Features
@@ -197,9 +197,9 @@ This project is private. All rights reserved.
 
 ## 👥 Team
 
-- **Bharti Nandan** - CEO & Co-Founder
+<!-- - **Bharti Nandan** - CEO & Co-Founder
 - **Anand Kumar** - CTO & Co-Founder
-- **Satyam Raj** - Full Stack Developer & Co-Founder
+- **Satyam Raj** - Full Stack Developer & Co-Founder -->
 
 ## 📞 Contact
 
