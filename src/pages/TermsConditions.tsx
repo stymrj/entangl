@@ -1,6 +1,7 @@
 import { FileText } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const TermsConditions = () => {
   const sections = [
@@ -115,13 +116,16 @@ Refunds are handled in accordance with our refund policy.`,
       title: "Contact Information",
       content: `For questions about these Terms and Conditions, please contact us at:
 
-**Email**: legal@entangl.com
-**Address**: 123 Market Street, Suite 500, San Francisco, CA 94105`,
+Email : support@entangl.in
+Address : Graphix 2, Noida Electronic City, Sector 62, Noida, 201301`,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}

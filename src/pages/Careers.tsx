@@ -2,6 +2,7 @@ import { MapPin, Clock, Briefcase, Heart, ArrowRight, CheckCircle } from "lucide
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const benefits = [
   "Competitive salary & equity",
@@ -18,44 +19,47 @@ const jobs = [
   {
     title: "Senior Frontend Engineer",
     department: "Engineering",
-    location: "Remote (US)",
+    location: "Remote (IN)",
     type: "Full-time",
   },
   {
     title: "Product Designer",
     department: "Design",
-    location: "San Francisco, CA",
+    location: "Noida, Uttar Pradesh",
     type: "Full-time",
   },
   {
     title: "Backend Engineer",
     department: "Engineering",
-    location: "Remote (Global)",
+    location: "Gurugram, Haryana",
     type: "Full-time",
   },
   {
     title: "Growth Marketing Manager",
     department: "Marketing",
-    location: "New York, NY",
+    location: "Remote (Global)",
     type: "Full-time",
   },
   {
     title: "Customer Success Lead",
     department: "Operations",
-    location: "Remote (US)",
+    location: "Remote (Global)",
     type: "Full-time",
   },
   {
     title: "Data Scientist",
     department: "Engineering",
-    location: "San Francisco, CA",
+    location: "Remote (Global)",
     type: "Full-time",
   },
 ];
 
 const Careers = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -71,27 +75,26 @@ const Careers = () => {
                 Careers
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up text-balance">
-                Build the future of{" "}
-                <span className="gradient-text">professional connections</span>
+                Join the <span className="gradient-text">Matching Revolution</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground animate-slide-up text-balance">
-                Join a team of passionate individuals working to transform how professionals 
-                discover and connect with each other.
+                We're building the world's first professional dating platform. Join our team and help professionals find their perfect match based on real chemistry.
               </p>
             </div>
           </div>
         </section>
 
         {/* Benefits Section */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Why join <span className="gradient-text">Entangl?</span>
+                Build Something <span className="gradient-text">Revolutionary</span>
               </h2>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                We take care of our team so they can focus on what matters
+                Be part of a team that's changing professional relationships forever. Amazing benefits, incredible mission.
               </p>
+                Be part of a team that's changing professional relationships forever. Amazing benefits, incredible mission.
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
@@ -158,7 +161,7 @@ const Careers = () => {
         </section>
 
         {/* Culture Section */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <div className="w-16 h-16 rounded-2xl gradient-bg mx-auto mb-6 flex items-center justify-center shadow-lg">
@@ -172,7 +175,7 @@ const Careers = () => {
                 about how you can contribute to our mission.
               </p>
               <Button variant="outline" size="lg" asChild>
-                <a href="mailto:careers@entangl.com">
+                <a href="mailto:support@entangl.in">
                   Send Us Your Resume
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </a>

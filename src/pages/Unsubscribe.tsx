@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Check, AlertCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,10 @@ const Unsubscribe = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -35,11 +39,10 @@ const Unsubscribe = () => {
                     <Mail className="w-8 h-8 text-coral" />
                   </div>
                   <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                    Unsubscribe from emails
+                    Stop the <span className="gradient-text">Love Notes</span>
                   </h1>
                   <p className="text-muted-foreground mb-8">
-                    We're sorry to see you go. Enter your email below to unsubscribe from 
-                    our marketing communications.
+                    We understand—professional dating isn't for everyone. Enter your email to unsubscribe from our updates.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,16 +73,15 @@ const Unsubscribe = () => {
                     <Check className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                    You've been unsubscribed
+                    We'll Miss You!
                   </h1>
                   <p className="text-muted-foreground mb-8">
-                    You won't receive any more marketing emails from us. 
-                    We hope to see you again soon!
+                    You've been unsubscribed. We won't send you any more love notes.
                   </p>
 
                   <div className="space-y-4">
                     <Button variant="outline" size="lg" className="w-full" onClick={() => setIsSubmitted(false)}>
-                      Made a mistake? Subscribe again
+                      Changed your mind? Subscribe again
                     </Button>
                     <Button variant="gradient" size="lg" className="w-full" asChild>
                       <a href="/">Return to Homepage</a>

@@ -2,39 +2,43 @@ import { Heart, Users, Target, Zap, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const values = [
   {
     icon: Heart,
-    title: "People First",
-    description: "We believe in building meaningful connections that go beyond transactional networking.",
+    title: "Chemistry Matters",
+    description: "We don't just match profiles. We match people whose skills, values, and goals create real synergy.",
   },
   {
     icon: Users,
-    title: "Inclusive Community",
-    description: "Diversity drives innovation. We welcome professionals from all backgrounds and industries.",
+    title: "Verified & Intentional",
+    description: "Only verified professionals. No fakes, no spam, no games—just serious people looking for serious connections.",
   },
   {
     icon: Target,
-    title: "Intentional Growth",
-    description: "Every feature we build is designed to help you grow professionally and personally.",
+    title: "Quality Over Quantity",
+    description: "Better to have 5 meaningful matches than 500 surface-level connections.",
   },
   {
     icon: Zap,
-    title: "Authentic Connections",
-    description: "No vanity metrics. Just real relationships that matter to your career journey.",
+    title: "Real Relationships",
+    description: "Co-founders who build unicorns. Mentors who change trajectories. Partners who become friends.",
   },
 ];
 
 const team = [
-  { name: "Bharti Nandan", role: "CEO & Co-Founder", emoji: "👩‍💼" },
-  { name: "Anand Kumar", role: "CTO & Co-Founder", emoji: "👨‍💻" },
-  { name: "Satyam Raj", role: "Full Stack Developer", emoji: "👩‍🎨" },
+  // { name: "Bharti Nandan", role: "CEO & Founder", emoji: "👨‍💻" },
+  // { name: "Satyam Raj", role: "CTO & Co-Founder", emoji: "👨‍💻" },
+  // { name: "Anand Kumar", role: "COO & Co-Founder", emoji: "👩‍🎨" },
 ];
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -50,18 +54,18 @@ const AboutUs = () => {
                 About Us
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up text-balance">
-                Redefining how <span className="gradient-text">professionals connect</span>
+                Professional <span className="gradient-text">Dating Done Right</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground animate-slide-up text-balance">
-                We started Entangl because we believe the best professional relationships aren't found—they're matched.
-                Our mission is to help ambitious professionals find their perfect career match.
+                We created Entangl because the best professional matches aren't accidents—they're intentional.
+                We use intelligent matching to connect ambitious professionals who genuinely complement each other.
               </p>
             </div>
           </div>
         </section>
 
         {/* Story Section */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="order-2 lg:order-1">
@@ -70,17 +74,13 @@ const AboutUs = () => {
                 </h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    In 2024, our founders Sarah and Marcus met at a tech conference. Despite being in the same industry,
-                    they had never crossed paths—until a mutual friend made the introduction that changed everything.
+                    We noticed something broken in professional networking. Endless connections with no meaningful relationships. Swipe-based apps that treated professionals like dating profiles. Cold emails that go unanswered.
                   </p>
                   <p>
-                    That serendipitous meeting sparked an idea: what if technology could create more of these meaningful
-                    professional connections? Not through endless scrolling or superficial networking, but through
-                    intelligent matching based on skills, goals, and chemistry.
+                    What if we built a platform where chemistry actually mattered? Where professionals could find their ideal match—whether that's a co-founder with complementary skills, a mentor who gets them, or a collaborator who sees their vision?
                   </p>
                   <p>
-                    Today, Entangl has helped over 2,000 professionals find their co-founders, mentors, and
-                    career-changing connections. We're just getting started.
+                    That's Entangl. We've matched over 2,000 verified professionals, leading to partnerships, mentorships, and friendships that have changed careers. We're building the future of professional relationships—one perfect match at a time.
                   </p>
                 </div>
               </div>
@@ -133,18 +133,18 @@ const AboutUs = () => {
         </section>
 
         {/* Team Section */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        {/* <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Meet the <span className="gradient-text">Team</span>
+                Meet the <span className="gradient-text">Founders</span>
               </h2>
               <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                The passionate people building the future of professional networking
+                Three professionals who met serendipitously and decided to make it less random for everyone else
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6">
               {team.map((member, index) => (
                 <div
                   key={member.name}
@@ -160,21 +160,21 @@ const AboutUs = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Join us on our <span className="gradient-text">mission</span>
+                Find Your <span className="gradient-text">Perfect Match</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                We're always looking for talented people who share our vision.
+                Join thousands of professionals already discovering meaningful connections on Entangl.
               </p>
               <Button variant="gradient" size="lg" asChild>
-                <a href="/careers">
-                  View Open Positions
+                <a href="/">
+                  Join the Waitlist
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </a>
               </Button>

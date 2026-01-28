@@ -2,72 +2,76 @@ import { Calendar, Clock, ArrowRight, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const featuredPost = {
-  title: "The Future of Professional Networking: Why Chemistry Matters",
-  excerpt: "Discover why traditional networking is broken and how chemistry-based matching is revolutionizing the way professionals connect.",
-  author: "Sarah Chen",
-  date: "January 15, 2026",
+  title: "Chemistry Over Connections: Why Professional Dating Changes Everything",
+  excerpt: "The future of professional relationships isn't LinkedIn. It's matching people who actually click—based on real compatibility, not just credentials.",
+  author: "Bharti Nandan",
+  date: "January 20, 2026",
   readTime: "8 min read",
   category: "Insights",
 };
 
 const posts = [
   {
-    title: "5 Signs You've Found Your Perfect Co-Founder",
-    excerpt: "The entrepreneurial journey is tough—here's how to know if you've found the right partner.",
-    author: "Marcus Johnson",
-    date: "January 10, 2026",
+    title: "Co-Founder Matching: Finding Your Perfect Professional Partner",
+    excerpt: "What makes co-founder relationships actually work? Real chemistry, aligned values, and complementary skills.",
+    author: "Anand Kumar",
+    date: "January 18, 2026",
     readTime: "5 min read",
     category: "Founders",
   },
   {
-    title: "Building Trust in Remote Professional Relationships",
-    excerpt: "Tips for creating meaningful connections when you can't meet face-to-face.",
-    author: "Elena Rodriguez",
-    date: "January 5, 2026",
+    title: "The Algorithm Meets Romance: How We Match Professionals Who Click",
+    excerpt: "Our matching engine goes beyond skills. We find people who actually vibe together.",
+    author: "Satyam Raj",
+    date: "January 16, 2026",
     readTime: "6 min read",
-    category: "Remote Work",
+    category: "Founders",
   },
   {
-    title: "The Art of the Informational Interview",
-    excerpt: "How to approach professionals for advice without feeling awkward.",
-    author: "David Kim",
-    date: "December 28, 2025",
-    readTime: "4 min read",
-    category: "Career",
-  },
-  {
-    title: "Why Mentorship Matters More Than Ever in 2026",
-    excerpt: "In an AI-driven world, human guidance becomes increasingly valuable.",
-    author: "Priya Patel",
-    date: "December 20, 2025",
+    title: "From Match to Millions: Real Stories of Professional Chemistry",
+    excerpt: "These founders and mentors found their perfect match on Entangl. Here's what happened next.",
+    author: "Jessica Chen",
+    date: "January 12, 2026",
     readTime: "7 min read",
-    category: "Mentorship",
-  },
-  {
-    title: "From Stranger to Strategic Partner: A Case Study",
-    excerpt: "How two Entangl members went from first coffee to Series A funding.",
-    author: "James Wright",
-    date: "December 15, 2025",
-    readTime: "10 min read",
     category: "Success Stories",
   },
   {
-    title: "The Science Behind Our Matching Algorithm",
-    excerpt: "A peek under the hood at how we pair professionals for maximum chemistry.",
-    author: "Marcus Johnson",
-    date: "December 10, 2025",
+    title: "Mentorship That Matters: Finding the Right Guide",
+    excerpt: "The best mentorship relationships are built on genuine connection and mutual respect.",
+    author: "Alex Patel",
+    date: "January 10, 2026",
+    readTime: "6 min read",
+    category: "Career",
+  },
+  {
+    title: "Why LinkedIn Isn't Enough: The Case for Professional Dating",
+    excerpt: "Surface-level connections don't build real relationships. Professional dating changes everything.",
+    author: "Marcus Thompson",
+    date: "January 8, 2026",
     readTime: "8 min read",
-    category: "Product",
+    category: "Insights",
+  },
+  {
+    title: "Building Real Professional Relationships: Beyond the Algorithm",
+    excerpt: "True compatibility goes deeper than resumes. Here's what actually matters.",
+    author: "Emma Wilson",
+    date: "January 5, 2026",
+    readTime: "7 min read",
+    category: "Insights",
   },
 ];
 
-const categories = ["All", "Insights", "Founders", "Career", "Remote Work", "Mentorship", "Success Stories", "Product"];
+const categories = ["All", "Insights", "Founders", "Success Stories", "Mentorship", "Product", "Career"];
 
 const Blog = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -83,11 +87,10 @@ const Blog = () => {
                 Blog
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up text-balance">
-                Insights for{" "}
-                <span className="gradient-text">ambitious professionals</span>
+                The <span className="gradient-text">Professional Dating</span> Blog
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground animate-slide-up">
-                Stories, tips, and strategies for building meaningful professional relationships.
+                Stories, insights, and chemistry guides for finding your perfect professional match.
               </p>
             </div>
 
@@ -152,7 +155,7 @@ const Blog = () => {
         </section>
 
         {/* Blog Grid */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {posts.map((post, index) => (

@@ -1,6 +1,7 @@
 import { Shield } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const PrivacyPolicy = () => {
   const sections = [
@@ -8,10 +9,10 @@ const PrivacyPolicy = () => {
       title: "Information We Collect",
       content: `We collect information you provide directly to us, such as when you create an account, update your profile, or communicate with us. This includes:
 
-• **Account Information**: Name, email address, company name, job title, and professional details.
-• **Profile Information**: Skills, interests, career goals, and preferences you share to improve matching.
-• **Communications**: Messages you send to other users and to our support team.
-• **Usage Data**: How you interact with our platform, including matches viewed and connections made.`,
+• Account Information : Name, email address, company name, job title, and professional details.
+• Profile Information : Skills, interests, career goals, and preferences you share to improve matching.
+• Communications : Messages you send to other users and to our support team.
+• Usage Data : How you interact with our platform, including matches viewed and connections made.`,
     },
     {
       title: "How We Use Your Information",
@@ -28,10 +29,10 @@ const PrivacyPolicy = () => {
       title: "Information Sharing",
       content: `We do not sell your personal information. We may share information about you as follows:
 
-• **With Other Users**: Your profile information is visible to verified members you're matched with.
-• **With Service Providers**: We work with third-party companies to perform services on our behalf.
-• **For Legal Reasons**: We may disclose information if required by law or to protect rights and safety.
-• **With Your Consent**: We may share information with your explicit consent.`,
+• With Other Users : Your profile information is visible to verified members you're matched with.
+• With Service Providers : We work with third-party companies to perform services on our behalf.
+• For Legal Reasons : We may disclose information if required by law or to protect rights and safety.
+• With Your Consent : We may share information with your explicit consent.`,
     },
     {
       title: "Data Security",
@@ -46,11 +47,11 @@ const PrivacyPolicy = () => {
       title: "Your Rights and Choices",
       content: `You have the right to:
 
-• **Access**: Request a copy of the personal information we hold about you.
-• **Correction**: Update or correct inaccurate information in your profile.
-• **Deletion**: Request deletion of your account and associated data.
-• **Portability**: Receive your data in a structured, commonly used format.
-• **Opt-out**: Unsubscribe from marketing communications at any time.`,
+• Access : Request a copy of the personal information we hold about you.
+• Correction : Update or correct inaccurate information in your profile.
+• Deletion : Request deletion of your account and associated data.
+• Portability : Receive your data in a structured, commonly used format.
+• Opt-out : Unsubscribe from marketing communications at any time.`,
     },
     {
       title: "Data Retention",
@@ -68,13 +69,15 @@ const PrivacyPolicy = () => {
       title: "Contact Us",
       content: `If you have any questions about this Privacy Policy or our data practices, please contact us at:
 
-**Email**: privacy@entangl.com
-**Address**: 123 Market Street, Suite 500, San Francisco, CA 94105`,
-    },
-  ];
+Email : support@entangl.in
+Address : Graphix 2, Noida Electronic City, Sector 62, Noida, 201301`,
+    },  ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -89,10 +92,10 @@ const PrivacyPolicy = () => {
                 <Shield className="w-8 h-8 text-primary-foreground" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 animate-slide-up">
-                Privacy Policy
+                Your Privacy, <span className="gradient-text">Protected</span>
               </h1>
               <p className="text-muted-foreground animate-slide-up">
-                Last Updated: January 1, 2026
+                Last Updated: January 27, 2026
               </p>
             </div>
           </div>

@@ -19,30 +19,31 @@ const Footer = () => {
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms & Conditions", href: "/terms" },
       { label: "Contact Us", href: "/contact" },
+      { label: "Unsubscribe", href: "/unsubscribe" },
     ],
   };
 
   return (
-    <footer className="bg-secondary/30 border-t border-border/40">
-      <div className="container mx-auto px-4 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-gradient-to-b from-white to-pink-50 border-t border-border/40 mt-20">
+      <div className="container mx-auto px-4 py-12 lg:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16 mb-12">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="inline-block mb-4">
-              <img src={logoFull} alt="Entangl" className="h-8 w-auto" />
+          <div className="md:col-span-1">
+            <Link to="/" className="inline-block mb-6">
+              <img src={logoFull} alt="Entangl" className="h-10 w-auto" />
             </Link>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               Where professionals find their perfect match.
             </p>
           </div>
 
           {/* Links Columns */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Product</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-semibold text-foreground mb-6 text-sm uppercase tracking-wider">Product</h4>
+            <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-coral transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -51,11 +52,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Company</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-semibold text-foreground mb-6 text-sm uppercase tracking-wider">Company</h4>
+            <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-coral transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -64,11 +65,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Legal</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-semibold text-foreground mb-6 text-sm uppercase tracking-wider">Legal</h4>
+            <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-coral transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -77,15 +78,16 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-8" />
+
         {/* Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-border/40">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-sm text-muted-foreground">
-              © 2026 Entangl. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-              Made with <Heart className="w-3.5 h-3.5 text-coral fill-coral" /> for professionals
-            </p>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            © 2026 Entangl. All rights reserved.
+          </p>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            Made with <Heart className="w-4 h-4 text-coral fill-coral" /> for professionals
           </div>
         </div>
       </div>

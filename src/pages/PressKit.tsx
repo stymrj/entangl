@@ -2,6 +2,7 @@ import { Download, FileText, Image, Video, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const brandAssets = [
   {
@@ -45,36 +46,39 @@ const brandAssets = [
 const pressReleases = [
   {
     date: "January 20, 2026",
-    title: "Entangl Raises $15M Series A to Transform Professional Networking",
+    title: "Entangl Raises $15M Series A to Revolutionize Professional Dating",
     outlet: "TechCrunch",
   },
   {
     date: "December 5, 2025",
-    title: "Entangl Surpasses 2,000 Verified Professionals on Platform",
+    title: "From Zero to 2,000 Verified Professionals: How Entangl Changed Networking",
     outlet: "Forbes",
   },
   {
     date: "October 15, 2025",
-    title: "Entangl Launches Chemistry-Based Matching for Professionals",
+    title: "The New Wave: Chemistry-Based Matching for Professionals",
     outlet: "The Verge",
   },
   {
     date: "August 1, 2025",
-    title: "Former Google and LinkedIn Executives Launch Entangl",
+    title: "Three Founders Launch Entangl: The Professional Dating App Built Right",
     outlet: "Business Insider",
   },
 ];
 
 const stats = [
-  { value: "2,000+", label: "Verified Professionals" },
-  { value: "500+", label: "Successful Matches" },
-  { value: "50+", label: "Countries" },
-  { value: "$15M", label: "Series A Raised" },
+  { value: "2,000+", label: "Verified Professionals Matched" },
+  { value: "500+", label: "Successful Connections Made" },
+  { value: "50+", label: "Countries & Growing" },
+  { value: "$15M", label: "Series A Funding" },
 ];
 
 const PressKit = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-pink-100 relative">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <AnimatedBackground variant="section" />
+      </div>
       <Navbar />
       <main className="pt-24">
         {/* Hero Section */}
@@ -90,11 +94,10 @@ const PressKit = () => {
                 Press Kit
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up text-balance">
-                Everything you need to{" "}
-                <span className="gradient-text">tell our story</span>
+                The <span className="gradient-text">Professional Dating</span> Revolution
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground animate-slide-up mb-8">
-                Download brand assets, press releases, and company information.
+                Brand assets, press releases, and company information for journalists and media partners.
               </p>
               <Button variant="gradient" size="lg">
                 <Download className="mr-2 w-5 h-5" />
@@ -105,7 +108,7 @@ const PressKit = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
@@ -161,7 +164,7 @@ const PressKit = () => {
         </section>
 
         {/* Press Releases */}
-        <section className="py-16 lg:py-24 bg-secondary/30">
+        <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -211,7 +214,7 @@ const PressKit = () => {
                 For press inquiries, interviews, or additional materials, please contact our communications team.
               </p>
               <Button variant="gradient" size="lg" asChild>
-                <a href="mailto:press@entangl.com">
+                <a href="mailto:supprt@entangl.in">
                   Contact Press Team
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </a>
