@@ -37,6 +37,7 @@ jobs:
       # 5️⃣ Prepare SSH key
       - name: Prepare SSH key
         run: |
+          mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
