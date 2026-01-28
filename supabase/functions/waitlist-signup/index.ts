@@ -143,14 +143,59 @@ const handler = async (req: Request): Promise<Response> => {
           to: [sanitizedEmail],
           subject: "Welcome to the Entangl Waitlist! 💕",
           html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2>Welcome to Entangl! 💕</h2>
-              <p>Thank you for joining our waitlist!</p>
-              <p>You're now part of an exclusive group who will be among the first to experience Entangl when we launch.</p>
-              <p>We'll keep you updated on our progress and notify you as soon as we're ready to go live.</p>
-              <p>In the meantime, feel free to share Entangl with friends who might be interested!</p>
-              <br>
-              <p>Best regards,<br>The Entangl Team 🚀</p>
+            <div style="background-color:#f5f7fb;padding:30px 0;font-family:Arial,Helvetica,sans-serif;">
+              <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+                
+                <!-- Header -->
+                <div style="background:linear-gradient(135deg,#7b61ff,#ff6ec7);padding:24px;text-align:center;">
+                  <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">
+                    Entangl 💕
+                  </h1>
+                  <p style="margin:8px 0 0;color:#f0f0f0;font-size:14px;">
+                    Meaningful connections, redefined
+                  </p>
+                </div>
+
+                <!-- Body -->
+                <div style="padding:32px;color:#333333;">
+                  <h2 style="margin-top:0;font-size:22px;">
+                    Welcome to the Entangl Waitlist 🎉
+                  </h2>
+
+                  <p style="font-size:15px;line-height:1.6;">
+                    Thank you for signing up! You're officially part of an exclusive group that will be the first to experience
+                    <strong>Entangl</strong> when we launch.
+                  </p>
+
+                  <p style="font-size:15px;line-height:1.6;">
+                    We're working hard behind the scenes to build something truly special, and we'll keep you updated every step
+                    of the way.
+                  </p>
+
+                  <!-- CTA -->
+                  <div style="text-align:center;margin:30px 0;">
+                    <a href="https://entangl.in"
+                       style="background:#7b61ff;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;display:inline-block;">
+                      Visit Entangl
+                    </a>
+                  </div>
+
+                  <p style="font-size:14px;color:#555555;">
+                    💡 Tip: Share Entangl with friends who might love being part of something new.
+                  </p>
+
+                  <p style="margin-top:32px;font-size:14px;">
+                    With love,<br />
+                    <strong>The Entangl Team 🚀</strong>
+                  </p>
+                </div>
+
+                <!-- Footer -->
+                <div style="background:#fafafa;padding:16px;text-align:center;font-size:12px;color:#888888;">
+                  © ${new Date().getFullYear()} Entangl. All rights reserved.
+                </div>
+
+              </div>
             </div>
           `,
         });

@@ -84,14 +84,52 @@ serve(async (req) => {
           reply_to: email, // Allow admin to reply directly to the user
           subject: `New Contact Form: ${subject}`,
           html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Subject:</strong> ${subject}</p>
-            <p><strong>Message:</strong></p>
-            <p>${message.replace(/\n/g, "<br>")}</p>
-            <hr>
-            <p><small>Submitted at: ${new Date().toISOString()}</small></p>
+            <div style="background-color:#f5f7fb;padding:30px 0;font-family:Arial,Helvetica,sans-serif;">
+              <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+                
+                <!-- Header -->
+                <div style="background:linear-gradient(135deg,#7b61ff,#ff6ec7);padding:24px;text-align:center;">
+                  <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">
+                    Entangl 💕
+                  </h1>
+                  <p style="margin:8px 0 0;color:#f0f0f0;font-size:14px;">
+                    New Contact Form Submission
+                  </p>
+                </div>
+
+                <!-- Body -->
+                <div style="padding:32px;color:#333333;">
+                  <h2 style="margin-top:0;font-size:22px;">
+                    📬 New Message Received
+                  </h2>
+
+                  <div style="background:#f9f9f9;padding:16px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:8px 0;font-size:14px;">
+                      <strong>From:</strong> ${name} (${email})
+                    </p>
+                    <p style="margin:8px 0;font-size:14px;">
+                      <strong>Subject:</strong> ${subject}
+                    </p>
+                  </div>
+
+                  <div style="background:#f0f0f0;padding:16px;border-left:4px solid #7b61ff;border-radius:4px;margin:20px 0;">
+                    <p style="margin:0;font-size:15px;line-height:1.6;">
+                      ${message.replace(/\n/g, "<br>")}
+                    </p>
+                  </div>
+
+                  <p style="font-size:13px;color:#888888;margin-top:20px;">
+                    Submitted at: ${new Date().toLocaleString()}
+                  </p>
+                </div>
+
+                <!-- Footer -->
+                <div style="background:#fafafa;padding:16px;text-align:center;font-size:12px;color:#888888;">
+                  © ${new Date().getFullYear()} Entangl. All rights reserved.
+                </div>
+
+              </div>
+            </div>
           `,
         });
         console.log("Admin email sent:", adminEmail);
@@ -103,13 +141,63 @@ serve(async (req) => {
           to: [email],
           subject: "We've received your message",
           html: `
-            <h2>Thank you for contacting Entangl!</h2>
-            <p>Hi ${name},</p>
-            <p>We've received your message and will get back to you within 24 hours.</p>
-            <p><strong>Your message:</strong></p>
-            <p>${message.replace(/\n/g, "<br>")}</p>
-            <hr>
-            <p>Best regards,<br>The Entangl Team</p>
+            <div style="background-color:#f5f7fb;padding:30px 0;font-family:Arial,Helvetica,sans-serif;">
+              <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.06);">
+                
+                <!-- Header -->
+                <div style="background:linear-gradient(135deg,#7b61ff,#ff6ec7);padding:24px;text-align:center;">
+                  <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">
+                    Entangl 💕
+                  </h1>
+                  <p style="margin:8px 0 0;color:#f0f0f0;font-size:14px;">
+                    Message Received
+                  </p>
+                </div>
+
+                <!-- Body -->
+                <div style="padding:32px;color:#333333;">
+                  <h2 style="margin-top:0;font-size:22px;">
+                    Thank you, ${name}! 🙏
+                  </h2>
+
+                  <p style="font-size:15px;line-height:1.6;">
+                    We've received your message and will get back to you within 24 hours. Our team is committed to providing you with the best support possible.
+                  </p>
+
+                  <div style="background:#f0f0f0;padding:16px;border-left:4px solid #7b61ff;border-radius:4px;margin:20px 0;">
+                    <p style="margin:0;font-size:14px;font-weight:600;color:#555555;">
+                      Your Message Summary:
+                    </p>
+                    <p style="margin:8px 0 0;font-size:14px;color:#666666;">
+                      <strong>Subject:</strong> ${subject}
+                    </p>
+                  </div>
+
+                  <p style="font-size:15px;line-height:1.6;margin-top:20px;">
+                    In the meantime, feel free to explore more about Entangl or check our FAQ.
+                  </p>
+
+                  <!-- CTA -->
+                  <div style="text-align:center;margin:30px 0;">
+                    <a href="https://entangl.in"
+                       style="background:#7b61ff;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;display:inline-block;">
+                      Learn More
+                    </a>
+                  </div>
+
+                  <p style="margin-top:32px;font-size:14px;">
+                    With love,<br />
+                    <strong>The Entangl Team 🚀</strong>
+                  </p>
+                </div>
+
+                <!-- Footer -->
+                <div style="background:#fafafa;padding:16px;text-align:center;font-size:12px;color:#888888;">
+                  © ${new Date().getFullYear()} Entangl. All rights reserved.
+                </div>
+
+              </div>
+            </div>
           `,
         });
         console.log("User confirmation email sent:", userEmail);
