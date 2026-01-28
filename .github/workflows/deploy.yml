@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repository
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -25,31 +25,35 @@ jobs:
       # 4️⃣ Debug dist folder (optional)
       - name: Debug dist folder
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Root files:"
-          ls -la
           echo "Dist contents:"
           ls -la dist
 
-      # 5️⃣ Clean target folder on EC2 (but keep the folder itself)
-      - name: Clear target folder
+      # 5️⃣ Create a tar of dist contents
+      - name: Tar dist contents
+        run: |
+          tar -czf dist.tar.gz -C dist .
+
+      # 6️⃣ Upload tar to EC2
+      - name: Upload tar to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "dist.tar.gz"
+          target: "/var/www/html/entangl.in/"
+          rm: false
+
+      # 7️⃣ Extract tar on EC2 and remove it
+      - name: Extract dist on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            echo "Removing old files inside /var/www/html/entangl.in"
+            echo "Clearing old files..."
             rm -rf /var/www/html/entangl.in/*
-
-      # 6️⃣ Upload only the contents of dist
-      - name: Upload dist contents to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "dist/."      # ✅ copy only contents, not the folder
-          target: "/var/www/html/entangl.in/"
-          rm: false             # we already cleared the folder manually
+            echo "Extracting new files..."
+            tar -xzf /var/www/html/entangl.in/dist.tar.gz -C /var/www/html/entangl.in
+            rm /var/www/html/entangl.in/dist.tar.gz
